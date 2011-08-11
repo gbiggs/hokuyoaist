@@ -836,7 +836,7 @@ void Sensor::get_sensor_info(SensorInfo& info)
 }
 
 
-unsigned int Sensor::get_time()
+unsigned long long Sensor::get_time()
 {
     return offset_timestamp(wrap_timestamp(get_raw_time()));
 }
