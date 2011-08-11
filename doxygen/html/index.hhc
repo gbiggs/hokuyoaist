@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Class List"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ArgError"><param name="Local" value="classhokuyoaist_1_1_arg_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::BaseError"><param name="Local" value="classhokuyoaist_1_1_base_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::BaudrateError"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ChecksumError"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::CloseError"><param name="Local" value="classhokuyoaist_1_1_close_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::CommandEchoError"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::DataCountError"><param name="Local" value="classhokuyoaist_1_1_data_count_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::EndStepError"><param name="Local" value="classhokuyoaist_1_1_end_step_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::FirmwareError"><param name="Local" value="classhokuyoaist_1_1_firmware_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::IndexError"><param name="Local" value="classhokuyoaist_1_1_index_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::InsufficientBytesError"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::IPAddr"><param name="Local" value="structhokuyoaist_1_1_i_p_addr.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::LineLengthError"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::LogicError"><param name="Local" value="classhokuyoaist_1_1_logic_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MisplacedLineFeedError"><param name="Local" value="classhokuyoaist_1_1_misplaced_line_feed_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MissingFirmSpecError"><param name="Local" value="classhokuyoaist_1_1_missing_firm_spec_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MotorSpeedError"><param name="Local" value="classhokuyoaist_1_1_motor_speed_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NoDataError"><param name="Local" value="classhokuyoaist_1_1_no_data_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NoDestinationError"><param name="Local" value="classhokuyoaist_1_1_no_destination_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NotSerialError"><param name="Local" value="classhokuyoaist_1_1_not_serial_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ParamEchoError"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ParseError"><param name="Local" value="classhokuyoaist_1_1_parse_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ProtocolError"><param name="Local" value="classhokuyoaist_1_1_protocol_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ReadError"><param name="Local" value="classhokuyoaist_1_1_read_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ResponseError"><param name="Local" value="classhokuyoaist_1_1_response_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::RuntimeError"><param name="Local" value="classhokuyoaist_1_1_runtime_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ScanData"><param name="Local" value="classhokuyoaist_1_1_scan_data.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::Scip1ResponseError"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ScipVersionError"><param name="Local" value="classhokuyoaist_1_1_scip_version_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::Sensor"><param name="Local" value="classhokuyoaist_1_1_sensor.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::SensorInfo"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::SetIPError"><param name="Local" value="classhokuyoaist_1_1_set_i_p_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::StartStepError"><param name="Local" value="classhokuyoaist_1_1_start_step_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnknownLineError"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnknownScipVersionError"><param name="Local" value="classhokuyoaist_1_1_unknown_scip_version_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnsupportedError"><param name="Local" value="classhokuyoaist_1_1_unsupported_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::WriteError"><param name="Local" value="classhokuyoaist_1_1_write_error.html"><param name="ImageNumber" value="11"></OBJECT>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Class Index"><param name="Local" value="classes.html"><param name="ImageNumber" value="1"></OBJECT>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Class Hierarchy"><param name="Local" value="hierarchy.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::BaseError"><param name="Local" value="classhokuyoaist_1_1_base_error.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::LogicError"><param name="Local" value="classhokuyoaist_1_1_logic_error.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::RuntimeError"><param name="Local" value="classhokuyoaist_1_1_runtime_error.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ArgError"><param name="Local" value="classhokuyoaist_1_1_arg_error.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::EndStepError"><param name="Local" value="classhokuyoaist_1_1_end_step_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MotorSpeedError"><param name="Local" value="classhokuyoaist_1_1_motor_speed_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::StartStepError"><param name="Local" value="classhokuyoaist_1_1_start_step_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::BaudrateError"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::CloseError"><param name="Local" value="classhokuyoaist_1_1_close_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::FirmwareError"><param name="Local" value="classhokuyoaist_1_1_firmware_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::IndexError"><param name="Local" value="classhokuyoaist_1_1_index_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NoDataError"><param name="Local" value="classhokuyoaist_1_1_no_data_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NoDestinationError"><param name="Local" value="classhokuyoaist_1_1_no_destination_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::NotSerialError"><param name="Local" value="classhokuyoaist_1_1_not_serial_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ProtocolError"><param name="Local" value="classhokuyoaist_1_1_protocol_error.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ChecksumError"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::CommandEchoError"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::DataCountError"><param name="Local" value="classhokuyoaist_1_1_data_count_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::InsufficientBytesError"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::LineLengthError"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MisplacedLineFeedError"><param name="Local" value="classhokuyoaist_1_1_misplaced_line_feed_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::MissingFirmSpecError"><param name="Local" value="classhokuyoaist_1_1_missing_firm_spec_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ParamEchoError"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ParseError"><param name="Local" value="classhokuyoaist_1_1_parse_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ResponseError"><param name="Local" value="classhokuyoaist_1_1_response_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::Scip1ResponseError"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnknownLineError"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ReadError"><param name="Local" value="classhokuyoaist_1_1_read_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ScipVersionError"><param name="Local" value="classhokuyoaist_1_1_scip_version_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::SetIPError"><param name="Local" value="classhokuyoaist_1_1_set_i_p_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnknownScipVersionError"><param name="Local" value="classhokuyoaist_1_1_unknown_scip_version_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::UnsupportedError"><param name="Local" value="classhokuyoaist_1_1_unsupported_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::WriteError"><param name="Local" value="classhokuyoaist_1_1_write_error.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::IPAddr"><param name="Local" value="structhokuyoaist_1_1_i_p_addr.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::ScanData"><param name="Local" value="classhokuyoaist_1_1_scan_data.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::Sensor"><param name="Local" value="classhokuyoaist_1_1_sensor.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist::SensorInfo"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html"><param name="ImageNumber" value="11"></OBJECT>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Class Members"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Namespace List"><param name="Local" value="namespaces.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="flexiport"><param name="Local" value="namespaceflexiport.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist"><param name="Local" value="namespacehokuyoaist.html"><param name="ImageNumber" value="11"></OBJECT>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Namespace Members"><param name="Local" value="namespacemembers.html"><param name="ImageNumber" value="11"></OBJECT>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="File List"><param name="Local" value="files.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/hokuyo_errors.h"><param name="Local" value="hokuyo__errors_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/hokuyoaist.h"><param name="Local" value="hokuyoaist_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/scan_data.h"><param name="Local" value="scan__data_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/sensor.h"><param name="Local" value="sensor_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/sensor_info.h"><param name="Local" value="sensor__info_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="/home/geoff/research/tmp/hokuyoaist/include/hokuyoaist/utils.h"><param name="Local" value="utils_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Directories"><param name="Local" value="dirs.html"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="include"><param name="Local" value="dir_1623a3df6f9becbcc2b538c6b42dba59.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="hokuyoaist"><param name="Local" value="dir_49f9041fea22f4b79b64218d3fb4191a.html"><param name="ImageNumber" value="11"></OBJECT>
+      <UL>
+      </UL>
+    </UL>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="File Members"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+</UL>
+</BODY>
+</HTML>
