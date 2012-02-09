@@ -29,6 +29,7 @@
 #ifndef SENSOR_H__
 #define SENSOR_H__
 
+#include <boost/asio.hpp>
 #include <string>
 
 #if defined(WIN32)
@@ -45,11 +46,6 @@
     #include <stdint.h>
     #define HOKUYOAIST_EXPORT
 #endif
-
-namespace flexiport
-{
-    class Port;
-}
 
 /** @ingroup library_hokuyoaist
 @{
@@ -461,7 +457,7 @@ class HOKUYOAIST_EXPORT Sensor
         unsigned int angle_to_step(double angle);
 
     private:
-        flexiport::Port* port_;
+        port::PortWrapper *port_;
         std::ostream& err_output_;
 
         uint8_t scip_version_;
