@@ -72,7 +72,9 @@ int main(int argc, char **argv)
         // Set the laser to verbose mode (so we see more information in the
         // console)
         if(verbose)
+        {
             laser.set_verbose(true);
+        }
 
         // Open the laser
         laser.open(port_options);

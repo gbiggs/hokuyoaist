@@ -279,7 +279,9 @@ Sensor::Sensor(std::ostream& err_output)
 Sensor::~Sensor()
 {
     if(port_ != 0)
-     delete port_;
+    {
+        delete port_;
+    }
 }
 
 
@@ -313,9 +315,13 @@ void Sensor::open(std::string port_options)
 void Sensor::close()
 {
     if(!port_)
+    {
         throw CloseError();
+    }
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ << "() Closing connection.\n";
+    }
     delete port_;
     port_ = 0;
 }
@@ -324,7 +330,9 @@ void Sensor::close()
 bool Sensor::is_open() const
 {
     if(port_ != 0)
+    {
         return port_->IsOpen();
+    }
     return false;
 }
 
@@ -338,15 +346,19 @@ void Sensor::set_power(bool on)
     if(on)
     {
         if(verbose_)
+        {
             err_output_ << "Sensor::" << __func__ <<
                 "() Turning laser on.\n";
+        }
         send_command("BM", 0, 0, "02");
     }
     else
     {
         if(verbose_)
+        {
             err_output_ << "Sensor::" << __func__ <<
                 "() Turning laser off.\n";
+        }
         send_command("QT", 0, 0, "02");
     }
     skip_lines(1);
@@ -379,7 +391,9 @@ void Sensor::set_ip(IPAddr const& addr, IPAddr const& subnet,
     // Skip the extra line feed
     skip_lines(1);
     if(status != 0)
+    {
         throw SetIPError();
+    }
 }
 
 
@@ -406,8 +420,10 @@ void Sensor::semi_reset()
         throw UnknownScipVersionError();
     }
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ <<
             "() Resetting laser.\n";
+    }
     send_command("RS", 0, 0, 0);
     skip_lines(1);
 }
@@ -421,7 +437,9 @@ void Sensor::set_motor_speed(unsigned int speed)
     }
     // Sanity check the value
     if(speed > 10 && speed != 99)
+    {
         throw MotorSpeedError();
+    }
     char buffer[3];
     if(speed == 0)
     {
@@ -468,8 +486,10 @@ void Sensor::set_high_sensitivity(bool on)
     if(on)
     {
         if(verbose_)
+        {
             err_output_ << "Sensor::" << __func__ <<
                 "() Switching to high sensitivity.\n";
+        }
         send_command("HS", "1", 1, "02");
     }
     else
@@ -543,8 +563,10 @@ unsigned int Sensor::get_raw_time()
         throw UnknownScipVersionError();
     }
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ <<
             "() Retrieving time from laser.\n";
+    }
     send_command("TM", "0", 1, 0);
     send_command("TM", "1", 1, 0);
     char buffer[7];
@@ -579,7 +601,9 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
     //      (Laser time - (Comp time before - Comp time after) / 2)
     // This is calculated samples times, and the median taken.
     if(verbose_)
+    {
         err_output_ << "Gathering " << samples << " offset values.\n";
+    }
     std::vector<long long> offsets;
     for(unsigned int ii = 0; ii < samples; ii++)
     {
@@ -602,13 +626,17 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
     // Calculate the median offset
     time_offset_ = median(offsets);
     if(verbose_)
+    {
         err_output_ << "Calculated offset is " << time_offset_ << '\n';
+    }
 
     if(skew_sleep_time > 0)
     {
         // Sleep, then do it again to approximate a skew line
         if(verbose_)
+        {
             err_output_ << "Sleeping for " << skew_sleep_time << "s.\n";
+        }
 #if defined(WIN32)
         DWORD sleep_time = skew_sleep_time * 1000;
 		Sleep(sleep_time);
@@ -619,7 +647,9 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
 #endif
 
         if(verbose_)
+        {
             err_output_ << "Gathering " << samples << " offset values.\n";
+        }
         offsets.clear();
         for(unsigned int ii = 0; ii < samples; ii++)
         {
@@ -649,7 +679,9 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
 
     // All done.
     if(verbose_)
+    {
         err_output_ << "Leaving timing mode.\n";
+    }
     leave_timing_mode();
     return time_offset_;
 }
@@ -667,9 +699,13 @@ unsigned int Sensor::get_ranges(ScanData& data, int start_step,
     memset(buffer, 0, sizeof(char) * 11);
 
     if(start_step < 0)
+    {
         start_step = first_step_;
+    }
     if(end_step < 0)
+    {
         end_step = last_step_;
+    }
 
     unsigned int num_steps = (end_step - start_step + 1) / cluster_count;
     if(verbose_)
@@ -686,14 +722,20 @@ unsigned int Sensor::get_ranges(ScanData& data, int start_step,
     number_to_string(end_step, &buffer[4], 4);
     number_to_string(cluster_count, &buffer[8], 2);
     if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
+    {
         send_command("HD", buffer, 10, 0);
+    }
     else
+    {
         send_command("GD", buffer, 10, 0);
+    }
     // There will be a timestamp before the data (if there is data)
     // Normally we would send 6 for the expected length, but we may get no
     // timestamp back if there was no data.
     if(read_line_with_check(buffer) == 0)
+    {
         throw NoDataError();
+    }
     data.laser_time_ = decode_4_byte_value(buffer) +
         step_to_time_offset(start_step);
     data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
@@ -715,9 +757,13 @@ unsigned int Sensor::get_ranges_by_angle(ScanData& data, double start_angle,
 
     // Check the steps are within the allowable range
     if(start_step < first_step_ || start_step > last_step_)
+    {
         throw StartStepError();
+    }
     if(end_step < first_step_ || end_step > last_step_)
+    {
         throw EndStepError();
+    }
 
     if(verbose_)
     {
@@ -743,9 +789,13 @@ unsigned int Sensor::get_ranges_intensities(ScanData& data, int start_step,
     memset(buffer, 0, sizeof(char) * 11);
 
     if(start_step < 0)
+    {
         start_step = first_step_;
+    }
     if(end_step < 0)
+    {
         end_step = last_step_;
+    }
 
     unsigned int num_steps = (end_step - start_step + 1) / cluster_count;
     if(verbose_)
@@ -762,14 +812,20 @@ unsigned int Sensor::get_ranges_intensities(ScanData& data, int start_step,
     number_to_string(end_step, &buffer[4], 4);
     number_to_string(cluster_count, &buffer[8], 2);
     if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
+    {
         send_command("HE", buffer, 10, 0);
+    }
     else
+    {
         send_command("GE", buffer, 10, 0);
+    }
     // There will be a timestamp before the data (if there is data)
     // Normally we would send 6 for the expected length, but we may get no
     // timestamp back if there was no data.
     if(read_line_with_check(buffer) == 0)
+    {
         throw NoDataError();
+    }
     data.laser_time_ = decode_4_byte_value(buffer) +
         step_to_time_offset(start_step);
     data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
@@ -791,9 +847,13 @@ unsigned int Sensor::get_ranges_intensities_by_angle(ScanData& data,
 
     // Check the steps are within the allowable range
     if(start_step < first_step_ || start_step > last_step_)
+    {
         throw StartStepError();
+    }
     if(end_step < first_step_ || end_step > last_step_)
+    {
         throw EndStepError();
+    }
 
     if(verbose_)
     {
@@ -819,9 +879,13 @@ unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
     memset(buffer, 0, sizeof(char) * 14);
 
     if(start_step < 0)
+    {
         start_step = first_step_;
+    }
     if(end_step < 0)
+    {
         end_step = last_step_;
+    }
 
     unsigned int num_steps = (end_step - start_step + 1) / cluster_count;
     if(verbose_)
@@ -840,9 +904,13 @@ unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
     number_to_string(1, &buffer[11], 2);
     char command[3];
     if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
+    {
         command[0] = 'N';
+    }
     else
+    {
         command[0] = 'M';
+    }
     command[1] = 'D';
     command[2] = '\0';
     send_command(command, buffer, 13, 0);
@@ -854,11 +922,15 @@ unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
     read_line(response, 16); // Size is command(2)+params(13)+new line(1)
     // Check the echo is correct
     if(response[0] != command[0] || response[1] != command[1])
+    {
         throw CommandEchoError(command, response);
+    }
     // Then compare the parameters
     buffer[12] = '0'; // There will be zero scans remaining after this one
     if(memcmp(&response[2], buffer, 13) != 0)
+    {
         throw ParamEchoError(command);
+    }
     // The next line should be the status line
     read_line_with_check(response, 4);
     if(verbose_)
@@ -881,7 +953,9 @@ unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
     // Normally we would send 6 for the expected length, but we may get no
     // timestamp back if there was no data.
     if(read_line_with_check(buffer) == 0)
+    {
         throw NoDataError();
+    }
     data.laser_time_ = decode_4_byte_value(buffer) +
         step_to_time_offset(start_step);
     data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
@@ -908,9 +982,13 @@ unsigned int Sensor::get_new_ranges_by_angle(ScanData& data,
 
     // Check the steps are within the allowable range
     if(start_step < first_step_ || start_step > last_step_)
+    {
         throw StartStepError();
+    }
     if(end_step < first_step_ || end_step > last_step_)
+    {
         throw EndStepError();
+    }
 
     if(verbose_)
     {
@@ -936,9 +1014,13 @@ unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
     memset(buffer, 0, sizeof(char) * 14);
 
     if(start_step < 0)
+    {
         start_step = first_step_;
+    }
     if(end_step < 0)
+    {
         end_step = last_step_;
+    }
 
     unsigned int num_steps = (end_step - start_step + 1) / cluster_count;
     if(verbose_)
@@ -958,9 +1040,13 @@ unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
     number_to_string(1, &buffer[11], 2);
     char command[3];
     if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
+    {
         command[0] = 'N';
+    }
     else
+    {
         command[0] = 'M';
+    }
     command[1] = 'E';
     command[2] = '\0';
     send_command(command, buffer, 13, 0);
@@ -972,11 +1058,15 @@ unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
     read_line(response, 16); // Size is command(2)+params(13)+new line(1)
     // Check the echo is correct
     if(response[0] != command[0] || response[1] != command[1])
+    {
         throw CommandEchoError(command, response);
+    }
     // Then compare the parameters
     buffer[12] = '0'; // There will be zero scans remaining after this one
     if(memcmp(&response[2], buffer, 13) != 0)
+    {
         throw ParamEchoError(command);
+    }
     // The next line should be the status line
     read_line_with_check(response, 4);
     if(verbose_)
@@ -999,7 +1089,9 @@ unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
     // Normally we would send 6 for the expected length, but we may get no
     // timestamp back if there was no data.
     if(read_line_with_check(buffer) == 0)
+    {
         throw NoDataError();
+    }
     data.laser_time_ = decode_4_byte_value(buffer) +
         step_to_time_offset(start_step);
     data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
@@ -1026,9 +1118,13 @@ unsigned int Sensor::get_new_ranges_intensities_by_angle(ScanData& data,
 
     // Check the steps are within the allowable range
     if(start_step < first_step_ || start_step > last_step_)
+    {
         throw StartStepError();
+    }
     if(end_step < first_step_ || end_step > last_step_)
+    {
         throw EndStepError();
+    }
 
     if(verbose_)
     {
@@ -1059,9 +1155,13 @@ unsigned int Sensor::angle_to_step(double angle)
     // Round towards front_step_ so that the step values are always inside the
     // angles given
     if(resultF < front_step_)
+    {
         result = static_cast<int>(ceil(resultF));
+    }
     else
+    {
         result = static_cast<int>(floor(resultF));
+    }
 
     return result;
 }
@@ -1110,9 +1210,13 @@ int Sensor::read_line(char* buffer, int expected_length)
         }
         // We need to get at least 1 byte in a line: the line feed.
         if((linelength = port_->ReadLine(buffer, maxlength)) < 0)
+        {
             throw ReadError(0);
+        }
         else if(linelength == 0)
+        {
             throw ReadError(1);
+        }
         // Replace the line feed with a 0
         buffer[linelength - 1] = '\0';
     }
@@ -1125,11 +1229,17 @@ int Sensor::read_line(char* buffer, int expected_length)
         }
         // expected_length+1 for the 0
         if((linelength = port_->ReadLine(buffer, expected_length + 1)) < 0)
+        {
             throw ReadError(0);
+        }
         else if(linelength == 0)
+        {
             throw ReadError(1);
+        }
         else if(linelength < expected_length)
+        {
             throw LineLengthError(linelength, expected_length);
+        }
         // Replace the line feed with a 0
         buffer[linelength - 1] = '\0';
     }
@@ -1175,7 +1285,9 @@ int Sensor::read_line_with_check(char* buffer, int expected_length,
     // If the line is empty, assume it was a line-feed message terminator, in
     // which case there is no checksum to check.
     if(linelength == 0)
+    {
         return 0;
+    }
 
     // Ignore the checksum itself, and possibly a semicolon (read_line_ has
     // already chopped off the line feed for us).
@@ -1188,7 +1300,9 @@ int Sensor::read_line_with_check(char* buffer, int expected_length,
             linelength << " bytes.\n";
     }
     if(bytesToConsider < 1)
+    {
         throw InsufficientBytesError(bytesToConsider, linelength);
+    }
 
     int checksum = 0;
     try
@@ -1222,12 +1336,16 @@ int Sensor::read_line_with_check(char* buffer, int expected_length,
                         static_cast<int>(buffer[checksumIndex]));
             }
             else
+            {
                 // Workaround is disabled - rethrow
                 throw;
+            }
         }
         else
+        {
             // Not a workaround-compatible error - rethrow
             throw;
+        }
     }
 
     // Null out the semi-colon (if there) and checksum
@@ -1308,7 +1426,9 @@ bool Sensor::read_data_block(char* buffer, int& block_size)
             block_size << " bytes.\n";
     }
     if(bytes_to_consider < 1)
+    {
         throw InsufficientBytesError(bytes_to_consider, block_size);
+    }
     confirm_checksum(buffer, bytes_to_consider,
             static_cast<int>(buffer[bytes_to_consider]));
     // Nullify the checksum
@@ -1323,10 +1443,14 @@ bool Sensor::read_data_block(char* buffer, int& block_size)
 void Sensor::skip_lines(int count)
 {
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ << "() Skipping " << count <<
             " lines.\n";
+    }
     if(port_->SkipUntil(0x0A, count) < 0)
+    {
         throw ReadError(18);
+    }
 }
 
 
@@ -1358,14 +1482,17 @@ int Sensor::send_command(char const* cmd, char const* param,
         }
         // Write the command
         if(port_->Write(cmd, 1) < 1)
-            throw WriteError(19);
-        if(param_length > 0)
         {
-            if(port_->Write(param, param_length) < param_length)
-                throw WriteError(20);
+            throw WriteError(19);
+        }
+        if(param_length > 0 && port_->Write(param, param_length) < param_length)
+        {
+            throw WriteError(20);
         }
         if(port_->Write("\n", 1) < 1)
+        {
             throw WriteError(21);
+        }
 
         // Read back the response (should get at least 4 bytes , possibly up to
         // 16 including \n's depending on the parameters): cmd[0] params \n
@@ -1435,25 +1562,29 @@ int Sensor::send_command(char const* cmd, char const* param,
         }
         // Write the command
         if(port_->Write(cmd, 2) < 2)
-            throw WriteError(19);
-        if(param_length > 0)
         {
-            if(port_->Write(param, param_length) < param_length)
-                throw WriteError(20);
+            throw WriteError(19);
+        }
+        if(param_length > 0 && port_->Write(param, param_length) < param_length)
+        {
+            throw WriteError(20);
         }
         if(port_->Write("\n", 1) < 1)
+        {
             throw WriteError(21);
+        }
 
         // Read back the command echo (minimum of 3 bytes, maximum of 16 bytes)
         read_line(response, 3 + param_length);
         // Check the echo is correct
         if(response[0] != cmd[0] || response[1] != cmd[1])
-            throw CommandEchoError(cmd, response);
-        // Then compare the parameters
-        if(param_length > 0)
         {
-            if(memcmp(&response[2], param, param_length) != 0)
-                throw ParamEchoError(cmd);
+            throw CommandEchoError(cmd, response);
+        }
+        // Then compare the parameters
+        if(param_length > 0 && memcmp(&response[2], param, param_length) != 0)
+        {
+            throw ParamEchoError(cmd);
         }
 
         // The next line should be the status line
@@ -1491,7 +1622,9 @@ int Sensor::send_command(char const* cmd, char const* param,
         // All OK, data starts at beginning of port's buffer
     }
     else
+    {
         throw UnknownScipVersionError();
+    }
 
     return statusCode;
 }
@@ -1525,23 +1658,37 @@ unsigned int Sensor::get_timing_mode_time(unsigned long long* reception_time)
     // then check/decode it later.
     char response[17];
     if(port_->Write("TM1\n", 4) < 4)
+    {
         throw WriteError(19);
+    }
     ssize_t line_length = port_->Read(response, 16);
     if(reception_time)
+    {
         *reception_time = get_computer_time();
+    }
     // Process the response to confirm it is correct
     if(line_length < 0)
+    {
         throw ReadError(0);
+    }
     else if(line_length == 0)
+    {
         throw ReadError(1);
+    }
     else if(line_length < 15)
+    {
         throw LineLengthError(line_length, 15);
+    }
     response[line_length - 1] = '\0';
     if(response[0] != 'T' || response[1] != 'M' || response[2] != '1')
+    {
         throw CommandEchoError("TM", response);
+    }
     response[7] = '\0';
     if(response[4] != '0' || response[5] != '0' || response[6] != 'P')
+    {
         throw ResponseError(response, "TM");
+    }
     // Check the checksum on the time stamp is accurate
     confirm_checksum(&response[8], 4, response[12]);
     // Decode the time stamp
@@ -1596,9 +1743,13 @@ unsigned long long Sensor::offset_timestamp(unsigned int timestamp)
 unsigned int Sensor::step_to_time_offset(int start_step)
 {
     if(start_step < 0)
+    {
         return first_step_ * time_resolution_;
+    }
     else
+    {
         return start_step * time_resolution_;
+    }
 }
 
 
@@ -1606,11 +1757,17 @@ unsigned int Sensor::step_to_time_offset(int start_step)
 void Sensor::find_model(char const* buffer)
 {
     if(strstr(buffer, "URG-04LX") != 0)
+    {
         model_ = MODEL_URG04LX;
+    }
     else if(strstr(buffer, "UBG-04LX") != 0)
+    {
         model_ = MODEL_UBG04LXF01;
+    }
     else if(strstr(buffer, "UHG-08LX") != 0)
+    {
         model_ = MODEL_UHG08LX;
+    }
     else if(strstr(buffer, "UTM-30LX") != 0)
     {
         model_ = MODEL_UTM30LX;
@@ -1619,9 +1776,13 @@ void Sensor::find_model(char const* buffer)
         enable_checksum_workaround_ = true;
     }
     else if(strstr(buffer, "UXM-30LX") != 0)
+    {
         model_ = MODEL_UXM30LXE;
+    }
     else
+    {
         model_ = MODEL_UNKNOWN;
+    }
 }
 
 
@@ -1631,8 +1792,10 @@ void Sensor::get_and_set_scip_version()
 
 
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ <<
             "() Testing SCIP protocol version.\n";
+    }
     // Try SCIP version 2 first by sending an info command
     try
     {
@@ -1642,8 +1805,10 @@ void Sensor::get_and_set_scip_version()
     {
         // That didn't work too well...
         if(verbose_)
+        {
             err_output_ << "Sensor::" << __func__ <<
                 "() Initial SCIP version 2 test failed.\n";
+        }
         scip2Failed = true;
     }
 
@@ -1670,7 +1835,9 @@ void Sensor::get_and_set_scip_version()
         read_line(buffer);
 
         if(strncmp(buffer, "FIRM:", 5) != 0)
+        {
             throw MissingFirmSpecError();
+        }
         // Pull out the major version number
         // Note that although lasers such as the UTM-30LX appear to use a
         // different firmware version format, that doesn't matter because they
@@ -1720,9 +1887,11 @@ void Sensor::get_and_set_scip_version()
             catch(BaseError)
             {
                 if(verbose_)
+                {
                     err_output_ << "Sensor::" << __func__ <<
                         "() Could not change to SCIP version 2; using SCIP "
                         "version 1.\n";
+                }
                 return;
             }
             // There'll be a trailing line on the end
@@ -1746,8 +1915,10 @@ void Sensor::get_and_set_scip_version()
         // Dump the rest of the result
         skip_lines(6);
         if(verbose_)
+        {
             err_output_ << "Sensor::" << __func__ <<
                 "() Using SCIP version 2.\n";
+        }
         return;
     }
 
@@ -1759,8 +1930,10 @@ void Sensor::get_and_set_scip_version()
 void Sensor::get_defaults()
 {
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ <<
             "() Getting default values.\n";
+    }
 
     // Get the laser's info
     SensorInfo info;
@@ -1786,7 +1959,9 @@ void Sensor::get_defaults()
 void Sensor::process_vv_line(char const* buffer, SensorInfo& info)
 {
     if(strncmp(buffer, "VEND", 4) == 0)
+    {
         info.vendor = &buffer[5]; // Vendor info, minus the "VEND:" tag
+    }
     else if(strncmp(buffer, "PROD", 4) == 0)
     {
         info.product = &buffer[5]; // Product info
@@ -1795,60 +1970,96 @@ void Sensor::process_vv_line(char const* buffer, SensorInfo& info)
         info.detected_model = model_;
     }
     else if(strncmp(buffer, "FIRM", 4) == 0)
+    {
         info.firmware = &buffer[5]; // Firmware version
+    }
     else if(strncmp(buffer, "PROT", 4) == 0)
+    {
         info.protocol = &buffer[5]; // Protocol version
+    }
     else if(strncmp(buffer, "SERI", 4) == 0)
+    {
         info.serial = &buffer[5]; // Serial number
+    }
     else if(!ignore_unknowns_)
+    {
         throw UnknownLineError(buffer);
+    }
 }
 
 
 void Sensor::process_pp_line(char const* buffer, SensorInfo& info)
 {
     if(strncmp(buffer, "MODL", 4) == 0)
+    {
         info.model = &buffer[5];   // Model
+    }
     // On to the fun ones that require parsing
     else if(strncmp(buffer, "DMIN", 4) == 0)
+    {
         info.min_range = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "DMAX", 4) == 0)
+    {
         info.max_range = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "ARES", 4) == 0)
+    {
         info.steps = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "AMIN", 4) == 0)
+    {
         info.first_step = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "AMAX", 4) == 0)
+    {
         info.last_step = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "AFRT", 4) == 0)
+    {
         info.front_step = atoi(&buffer[5]);
+    }
     else if(strncmp(buffer, "SCAN", 4) == 0)
+    {
         info.standard_speed = atoi(&buffer[5]);
+    }
     /* No example in the manual and sensor with support for this has not
      * arrived yet, so don't know what to look for.
     else if(strncmp(buffer, "", 4) == 0)
     {
         if(strstr(buffer, "CCW") != 0)
+        {
             info.rot_dir = COUNTERCLOCKWISE;
+        }
         else
+        {
             info.rot_dir = CLOCKWISE;
+        }
     }*/
     else if(!ignore_unknowns_)
+    {
         throw UnknownLineError(buffer);
+    }
 }
 
 
 void Sensor::process_ii_line(char const* buffer, SensorInfo& info)
 {
     if(strncmp(buffer, "MODL", 4) == 0)
+    {
         // Do nothing here - we already know this value from PP
         return;
+    }
     else if(strncmp(buffer, "LASR", 4) == 0)
     {
         if(strncmp(&buffer[5], "OFF", 3) == 0)
+        {
             info.power = false;
+        }
         else
+        {
             info.power = true;
+        }
     }
     else if(strncmp(buffer, "SCSP", 4) == 0)
     {
@@ -1873,7 +2084,9 @@ void Sensor::process_ii_line(char const* buffer, SensorInfo& info)
         }
     }
     else if(strncmp(buffer, "MESM", 4) == 0)
+    {
         info.measure_state = &buffer[5];
+    }
     else if(strncmp(buffer, "SBPS", 4) == 0)
     {
         if(strncmp(&buffer[5], "USB only", 8) == 0 ||
@@ -1883,17 +2096,25 @@ void Sensor::process_ii_line(char const* buffer, SensorInfo& info)
             info.baud = 0;
         }
         else if(sscanf(buffer, "SBPS:%d[bps]", &info.baud) != 1)
+        {
             throw ParseError(buffer, "Baud rate");
+        }
     }
     else if(strncmp(buffer, "TIME", 4) == 0)
     {
         if(sscanf(buffer, "TIME:%x", &info.time) != 1)
+        {
             throw ParseError(buffer, "Timestamp");
+        }
     }
     else if(strncmp(buffer, "STAT", 4) == 0)
+    {
         info.sensor_diagnostic = &buffer[5];
+    }
     else if(!ignore_unknowns_)
+    {
         throw UnknownLineError(buffer);
+    }
 }
 
 
@@ -1909,9 +2130,13 @@ uint32_t Sensor::process_echo_buffer(int const* buffer, int num_echos)
             break;
         case ME_MIDDLE:
             if(num_echos == 3)
+            {
                 return buffer[1];
+            }
             else
+            {
                 return buffer[0];
+            }
             break;
         case ME_REAR:
             return buffer[num_echos -1 ];
@@ -1972,10 +2197,14 @@ void Sensor::read_2_byte_range_data(ScanData& data, unsigned int num_steps)
     }
 
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ << "() Read " <<
             current_step << " ranges.\n";
+    }
     if(current_step != num_steps)
+    {
         throw DataCountError();
+    }
 }
 
 
@@ -2118,10 +2347,14 @@ void Sensor::read_3_byte_range_data(ScanData& data, unsigned int num_steps)
     }
 
     if(verbose_)
+    {
         err_output_ << "Sensor::" << __func__ << "() Read " <<
             current_step << " ranges.\n";
+    }
     if(current_step != num_steps)
+    {
         throw DataCountError();
+    }
 }
 
 
@@ -2210,17 +2443,25 @@ void Sensor::read_3_byte_range_and_intensity_data(ScanData& data,
                                 " beyond maximum range: " <<
                                 data.ranges_[current_range] << " (raw bytes: ";
                             if(split_count != 0)
+                            {
                                 err_output_ << split_value[0] << split_value[1] <<
                                     split_value[2] << ")\n";
+                            }
                             else
+                            {
                                 err_output_ << buffer[0] << buffer[1] << buffer[2] <<
                                     ")\n";
+                            }
                         }
                     }
                     if(nextIsIntensity)
+                    {
                         current_intensity++;
+                    }
                     else
+                    {
                         current_range++;
+                    }
                     // Alternate between range and intensity values
                     nextIsIntensity = !nextIsIntensity;
                 }
@@ -2285,7 +2526,9 @@ void Sensor::read_3_byte_range_and_intensity_data(ScanData& data,
             " intensities (expected " << num_steps << ").\n";
     }
     if(current_range != num_steps || current_intensity != num_steps)
+    {
         throw DataCountError();
+    }
 }
 
 
@@ -2310,7 +2553,9 @@ int Sensor::confirm_checksum(char const* buffer, int length,
             ")\n";
     }
     if(checksum != expected_sum)
+    {
         throw ChecksumError(expected_sum, checksum);
+    }
 
     return checksum;
 }

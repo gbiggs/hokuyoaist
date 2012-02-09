@@ -42,29 +42,51 @@ std::string scip2_error_to_string(char const* const error,
 
     // Check for non-errors
     if(error[0] == '0' && error[1] == '0')
+    {
         return "Status OK - 00";
+    }
     else if(error[0] == '9' && error[1] == '9')
+    {
         return "Status OK - 99";
+    }
 
     // Check for universal errors
     if(error[0] == '0' && error[1] == 'A')
+    {
         return "Unable to create transmission data or reply command internally";
+    }
     else if(error[0] == '0' && error[1] == 'B')
+    {
         return "Buffer shortage or command repeated that is already processed";
+    }
     else if(error[0] == '0' && error[1] == 'C')
+    {
         return "Command with insufficient parameters 1";
+    }
     else if(error[0] == '0' && error[1] == 'D')
+    {
         return "Undefined command 1";
+    }
     else if(error[0] == '0' && error[1] == 'E')
+    {
         return "Undefined command 2";
+    }
     else if(error[0] == '0' && error[1] == 'F')
+    {
         return "Command with insufficient parameters 2";
+    }
     else if(error[0] == '0' && error[1] == 'G')
+    {
         return "String character in command exceeds 16 letters";
+    }
     else if(error[0] == '0' && error[1] == 'H')
+    {
         return "String character has invalid letters";
+    }
     else if(error[0] == '0' && error[1] == 'I')
+    {
         return "Sensor is now in firmware update mode";
+    }
 
     int error_code = atoi(error);
 
@@ -110,10 +132,14 @@ std::string scip2_error_to_string(char const* const error,
                 return "Laser is off";
             default:
                 if(error_code >= 50)
+                {
                     ss << "Hardware error: " << error_code;
+                }
                 else
+                {
                     ss << "Unknown error code " << error_code <<
                         " for command " << cmd[0] << cmd[1];
+                }
 
                 return ss.str();
         }
@@ -145,7 +171,9 @@ std::string scip2_error_to_string(char const* const error,
                         "This function is not yet supported by hokuyoaist.";
                 }
                 else if(error_code >= 50 && error_code <= 97)
+                {
                     ss << "Hardware error: " << error_code;
+                }
                 else if(error_code == 98)
                 {
                     return "Resumption of processing after confirming normal "
@@ -153,8 +181,10 @@ std::string scip2_error_to_string(char const* const error,
                         "by hokuyoaist.";
                 }
                 else
+                {
                     ss << "Unknown error code " << error_code <<
                         " for command " << cmd[0] << cmd[1];
+                }
 
                 return ss.str();
         }

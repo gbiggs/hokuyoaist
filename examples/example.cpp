@@ -116,7 +116,9 @@ int main(int argc, char **argv)
         // Set the laser to verbose mode (so we see more information in the
         // console)
         if(verbose)
+        {
             laser.set_verbose(true);
+        }
 
         // Open the laser
         laser.open(port_options);
@@ -177,36 +179,54 @@ int main(int argc, char **argv)
         {
             // Get all ranges
             if(get_new)
+            {
                 laser.get_new_ranges(data, -1, -1, cluster_count);
+            }
             else if(get_intensities)
+            {
                 laser.get_new_ranges_intensities(data, -1, -1, cluster_count);
+            }
             else
+            {
                 laser.get_ranges(data, -1, -1, cluster_count);
+            }
         }
         else if(first_step != -1 || last_step != -1)
         {
             // Get by step
             if(get_new)
+            {
                 laser.get_new_ranges(data, first_step, last_step,
                         cluster_count);
+            }
             else if(get_intensities)
+            {
                 laser.get_new_ranges_intensities(data, first_step, last_step,
                         cluster_count);
+            }
             else
+            {
                 laser.get_ranges(data, first_step, last_step, cluster_count);
+            }
         }
         else
         {
             // Get by angle
             if(get_new)
+            {
                 laser.get_new_ranges_by_angle(data, start_angle, end_angle,
                         cluster_count);
+            }
             else if(get_intensities)
+            {
                 laser.get_new_ranges_intensities_by_angle(data, start_angle,
                         end_angle, cluster_count);
+            }
             else
+            {
                 laser.get_ranges_by_angle(data, start_angle, end_angle,
                         cluster_count);
+            }
         }
 
         std::cout << "Measured data:\n";

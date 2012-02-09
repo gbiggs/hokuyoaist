@@ -63,7 +63,9 @@ ScanData::ScanData(ScanData const& rhs)
     ranges_length_ = rhs.ranges_length();
     intensities_length_ = rhs.intensities_length();
     if(ranges_length_ == 0)
+    {
         ranges_ = 0;
+    }
     else
     {
         try
@@ -78,7 +80,9 @@ ScanData::ScanData(ScanData const& rhs)
         memcpy(ranges_, rhs.ranges(), sizeof(uint32_t) * ranges_length_);
     }
     if(intensities_length_ == 0)
+    {
         intensities_ = 0;
+    }
     else
     {
         try
@@ -221,7 +225,9 @@ ScanData& ScanData::operator=(ScanData const& rhs)
                 uint32_t* new_data = new uint32_t[rhslength];
                 memcpy(new_data, rhs.ranges(), sizeof(uint32_t) * rhslength);
                 if(ranges_ != 0)
+                {
                     delete[] ranges_;
+                }
                 ranges_ = new_data;
                 ranges_length_ = rhs.ranges_length();
             }
@@ -258,7 +264,9 @@ ScanData& ScanData::operator=(ScanData const& rhs)
                 memcpy(new_data, rhs.intensities(),
                         sizeof(uint32_t) * rhslength);
                 if(intensities_ != 0)
+                {
                     delete[] intensities_;
+                }
                 intensities_ = new_data;
                 intensities_length_ = rhs.intensities_length();
             }
@@ -284,7 +292,9 @@ ScanData& ScanData::operator=(ScanData const& rhs)
 uint32_t ScanData::operator[](unsigned int index)
 {
     if(index >= ranges_length_)
+    {
         throw IndexError();
+    }
     return ranges_[index];
 }
 
@@ -316,11 +326,15 @@ std::string ScanData::as_string()
         for(unsigned int ii = 0; ii < ranges_length_; ii++)
         {
             if(ranges_[ii] < 20)
+            {
                 ss << ii << ": " << error_code_to_string(ranges_[ii]) << '\n';
+            }
         }
     }
     else
+    {
         ss << "No data errors.\n";
+    }
     ss << "Laser time stamp: " << laser_time_ << "ms\n";
     ss << "System time stamp: " << system_time_ << "ns\n";
 
@@ -333,10 +347,14 @@ void ScanData::clean_up()
     if(!buffers_provided_)
     {
         if(ranges_ != 0)
+        {
             delete[] ranges_;
+        }
         ranges_ = 0;
         if(intensities_ != 0)
+        {
             delete[] intensities_;
+        }
         intensities_ = 0;
     }
     ranges_length_ = 0;
@@ -351,7 +369,9 @@ void ScanData::allocate_data(unsigned int length, bool include_intensities)
 {
     // If buffers have been provided, automatic allocation is off.
     if(buffers_provided_)
+    {
         return;
+    }
 
     // If no data yet, allocate new
     if(ranges_ == 0)
@@ -433,10 +453,14 @@ void ScanData::write_range(unsigned int index, uint32_t value)
     if(ranges_ != 0)
     {
         if(index >= ranges_length_)
+        {
             throw IndexError();
+        }
         ranges_[index] = value;
         if(ranges_[index] < 20)
+        {
             error_ = true;
+        }
     }
 }
 
@@ -446,10 +470,14 @@ void ScanData::write_intensity(unsigned int index, uint32_t value)
     if(intensities_ != 0)
     {
         if(index >= intensities_length_)
+        {
             throw IndexError();
+        }
         intensities_[index] = value;
         if(intensities_[index] < 20)
+        {
             error_ = true;
+        }
     }
 }
 
