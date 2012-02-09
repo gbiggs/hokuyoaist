@@ -66,37 +66,6 @@ unsigned int const SCIP2_LINE_LENGTH = 67;
 unsigned int const DATA_BLOCK_LENGTH = 64;
 
 ///////////////////////////////////////////////////////////////////////////////
-// SCIP protocol version 1 notes
-///////////////////////////////////////////////////////////////////////////////
-
-/* | = byte boundary, ... indicates variable byte block (max 64 bytes),
-(x) = x byte block
- - No checksum
- - Host to sensor: Command | Parameters... | LF
- - Sensor to host: Command | Parameters... | LF | Status | LF | Data... | LF | LF
- - Where a block of data would take more than 64 bytes, a line feed is inserted
-   every 64 bytes.
- - Status 0 is OK, anything else is an error.
-
-L  Power
-   L|Control code|LF
-   L|Control code|LF|Status|LF|LF
-   3 byte command block
-G  Get data
-   G|Start(3)|End(3)|Cluster(2)|LF
-   G|Start(3)|End(3)|Cluster(2)|LF|Status|LF|Data...|LF|LF
-   10 byte command block
-S  Set baud rate
-   S|Baud rate(6)|Reserved(7)|LF
-   S|Baud rate(6)|Reserved(7)|Status|LF|LF|
-   16 byte command block
-V  Version info
-   V|LF
-   V|LF|Status...|LF|Vendor...|LF|Product...|LF|Firmware...|LF|Protocol...|LF|
-        Serial...|LF|LF
-   2 byte command block
-*/
-
 // SCIP protocol version 2 notes
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -341,97 +310,6 @@ void Sensor::open(std::string port_options)
 }
 
 
-unsigned int Sensor::open_with_probing(std::string port_options)
-{
-    if(verbose_)
-    {
-        err_output_ << "Sensor::" << __func__ <<
-            "() Creating and opening port using options: " << port_options <<
-            '\n';
-    }
-    port_ = flexiport::CreatePort(port_options);
-    port_->Open();
-
-    if(verbose_)
-    {
-        err_output_ << "Sensor::" << __func__ << "() Connected using " <<
-            port_->GetPortType() << " connection.\n";
-        err_output_ << port_->GetStatus();
-    }
-    port_->Flush();
-
-    try
-    {
-        // Figure out the SCIP version currently in use and switch to a higher
-        // one if possible
-        get_and_set_scip_version();
-        // Get some values we need for providing default ranges
-        get_defaults();
-    }
-    catch(BaseError)
-    {
-        if(verbose_)
-        {
-            err_output_ << "Sensor::" << __func__ <<
-                "() Failed to connect at the default baud rate.\n";
-        }
-        if(port_->GetPortType() == "serial")
-        {
-            // Failed at the default baud rate, so try again at the other
-            // rates. Note that a baud rate of 750000 or 250000 doesn't appear
-            // to be supported on any common OS.
-            unsigned int const bauds[] = {500000, 115200, 57600, 38400, 19200};
-            unsigned int const numBauds(5);
-            for (unsigned int ii = 0; ii < numBauds; ii++)
-            {
-                reinterpret_cast<flexiport::SerialPort*>(port_)->SetBaudRate(bauds[ii]);
-                try
-                {
-                    get_and_set_scip_version();
-                    get_defaults();
-                    // If the above two functions succeed, break out of the
-                    // loop and be happy
-                    if(verbose_)
-                    {
-                        err_output_ << "Sensor::" << __func__ <<
-                            "() Connected at " << bauds[ii] << '\n';
-                    }
-                    return bauds[ii];
-                }
-                catch(BaseError)
-                {
-                    if(ii == numBauds - 1)
-                    {
-                        // Last baud rate, give up and rethrow
-                        if(verbose_)
-                        {
-                            err_output_ << "Sensor::" << __func__ <<
-                                "() Failed to connect at any baud rate.\n";
-                        }
-                        throw;
-                    }
-                    // Otherwise go around again
-                }
-            }
-        }
-        else
-        {
-            if(verbose_)
-            {
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Port is not serial, cannot probe.\n";
-            }
-            throw;
-        }
-    }
-
-    if(port_->GetPortType() == "serial")
-        return reinterpret_cast<flexiport::SerialPort*>(port_)->GetBaudRate();
-    else
-        return 0;
-}
-
-
 void Sensor::close()
 {
     if(!port_)
@@ -453,82 +331,25 @@ bool Sensor::is_open() const
 
 void Sensor::set_power(bool on)
 {
-    if(scip_version_ == 1)
+    if(scip_version_ != 2)
     {
-        if(on)
-        {
-            if(verbose_)
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Turning laser on.\n";
-            send_command("L", "1", 1, 0);
-        }
-        else
-        {
-            if(verbose_)
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Turning laser off.\n";
-            send_command("L", "0", 1, 0);
-        }
-        skip_lines(1);
+        throw UnknownScipVersionError();
     }
-    else if(scip_version_ == 2)
+    if(on)
     {
-        if(on)
-        {
-            if(verbose_)
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Turning laser on.\n";
-            send_command("BM", 0, 0, "02");
-        }
-        else
-        {
-            if(verbose_)
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Turning laser off.\n";
-            send_command("QT", 0, 0, "02");
-        }
-        skip_lines(1);
+        if(verbose_)
+            err_output_ << "Sensor::" << __func__ <<
+                "() Turning laser on.\n";
+        send_command("BM", 0, 0, "02");
     }
     else
-        throw UnknownScipVersionError();
-}
-
-
-// This function assumes that both the port and the laser scanner are already
-// set to the same baud.
-void Sensor::set_baud(unsigned int baud)
-{
-    if(port_->GetPortType() != "serial")
-        throw NotSerialError();
-
-    char newBaud[13];
-    memset(newBaud, 0, sizeof(char) * 13);
-
-    if(baud != 19200 && baud != 38400 && baud != 57600 && baud != 115200 &&
-        baud != 250000 && baud != 500000 && baud != 750000)
     {
-        throw BaudrateError(baud);
+        if(verbose_)
+            err_output_ << "Sensor::" << __func__ <<
+                "() Turning laser off.\n";
+        send_command("QT", 0, 0, "02");
     }
-    number_to_string(baud, newBaud, 6);
-
-    if(scip_version_ == 1)
-    {
-        // Send the command to change baud rate
-        send_command("S", newBaud, 13, 0);
-        skip_lines(1);
-        // Change the port's baud rate
-        reinterpret_cast<flexiport::SerialPort*>(port_)->SetBaudRate(baud);
-    }
-    else if(scip_version_ == 2)
-    {
-        // Send the command to change baud rate
-        send_command("SS", newBaud, 6, "03");
-        skip_lines(1);
-        // Change the port's baud rate
-        reinterpret_cast<flexiport::SerialPort*>(port_)->SetBaudRate(baud);
-    }
-    else
-        throw UnknownScipVersionError();
+    skip_lines(1);
 }
 
 
@@ -564,275 +385,148 @@ void Sensor::set_ip(IPAddr const& addr, IPAddr const& subnet,
 
 void Sensor::reset()
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(7);
-    else if(scip_version_ == 2)
+    if(scip_version_ != 2)
     {
-        if(verbose_)
-        {
-            err_output_ << "Sensor::" << __func__ <<
-                "() Resetting laser.\n";
-        }
-        send_command("RS", 0, 0, 0);
-        skip_lines(1);
-    }
-    else
         throw UnknownScipVersionError();
+    }
+    if(verbose_)
+    {
+        err_output_ << "Sensor::" << __func__ <<
+            "() Resetting laser.\n";
+    }
+    send_command("RS", 0, 0, 0);
+    skip_lines(1);
 }
 
 
 void Sensor::semi_reset()
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(35);
-    else if(scip_version_ == 2)
+    if(scip_version_ != 2)
     {
-        if(verbose_)
-            err_output_ << "Sensor::" << __func__ <<
-                "() Resetting laser.\n";
-        send_command("RS", 0, 0, 0);
-        skip_lines(1);
-    }
-    else
         throw UnknownScipVersionError();
+    }
+    if(verbose_)
+        err_output_ << "Sensor::" << __func__ <<
+            "() Resetting laser.\n";
+    send_command("RS", 0, 0, 0);
+    skip_lines(1);
 }
 
 
 void Sensor::set_motor_speed(unsigned int speed)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(8);
-    else if(scip_version_ == 2)
+    if(scip_version_ != 2)
     {
-        // Sanity check the value
-        if(speed > 10 && speed != 99)
-            throw MotorSpeedError();
-        char buffer[3];
-        if(speed == 0)
+        throw UnknownScipVersionError();
+    }
+    // Sanity check the value
+    if(speed > 10 && speed != 99)
+        throw MotorSpeedError();
+    char buffer[3];
+    if(speed == 0)
+    {
+        if(verbose_)
         {
-            if(verbose_)
-            {
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Reseting motor speed to default.\n";
-            }
-            buffer[0] = '0';
-            buffer[1] = '0';
-            buffer[2] = '\0';
+            err_output_ << "Sensor::" << __func__ <<
+                "() Reseting motor speed to default.\n";
         }
-        else if(speed == 99)
+        buffer[0] = '0';
+        buffer[1] = '0';
+        buffer[2] = '\0';
+    }
+    else if(speed == 99)
+    {
+        if(verbose_)
         {
-            if(verbose_)
-            {
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Reseting motor speed to default.\n";
-            }
-            buffer[0] = '9';
-            buffer[1] = '9';
-            buffer[2] = '\0';
+            err_output_ << "Sensor::" << __func__ <<
+                "() Reseting motor speed to default.\n";
         }
-        else
-        {
-            if(verbose_)
-            {
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Setting motor speed to ratio " << speed << '\n';
-            }
-            number_to_string(speed, buffer, 2);
-        }
-        send_command("CR", buffer, 2, "03");
-        skip_lines(1);
+        buffer[0] = '9';
+        buffer[1] = '9';
+        buffer[2] = '\0';
     }
     else
-        throw UnknownScipVersionError();
+    {
+        if(verbose_)
+        {
+            err_output_ << "Sensor::" << __func__ <<
+                "() Setting motor speed to ratio " << speed << '\n';
+        }
+        number_to_string(speed, buffer, 2);
+    }
+    send_command("CR", buffer, 2, "03");
+    skip_lines(1);
 }
 
 
 void Sensor::set_high_sensitivity(bool on)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(10);
-    else if(scip_version_ == 2)
+    if(scip_version_ != 2)
     {
-        if(on)
-        {
-            if(verbose_)
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Switching to high sensitivity.\n";
-            send_command("HS", "1", 1, "02");
-        }
-        else
-        {
-            if(verbose_)
-            {
-                err_output_ << "Sensor::" << __func__ <<
-                    "() Switching to normal sensitivity.\n";
-            }
-            send_command("HS", "0", 1, "02");
-        }
-        skip_lines(1);
+        throw UnknownScipVersionError();
+    }
+    if(on)
+    {
+        if(verbose_)
+            err_output_ << "Sensor::" << __func__ <<
+                "() Switching to high sensitivity.\n";
+        send_command("HS", "1", 1, "02");
     }
     else
-        throw UnknownScipVersionError();
+    {
+        if(verbose_)
+        {
+            err_output_ << "Sensor::" << __func__ <<
+                "() Switching to normal sensitivity.\n";
+        }
+        send_command("HS", "0", 1, "02");
+    }
+    skip_lines(1);
 }
 
 
 void Sensor::get_sensor_info(SensorInfo& info)
 {
-    if(scip_version_ == 1)
+    if(scip_version_ != 2)
     {
-        if(verbose_)
-        {
-            err_output_ << "Sensor::" << __func__ <<
-                "() Getting sensor information using SCIP version 1.\n";
-        }
-
-        info.set_defaults();
-
-        char buffer[SCIP1_LINE_LENGTH];
-        memset(buffer, 0, sizeof(char) * SCIP1_LINE_LENGTH);
-
-        send_command("V", 0, 0, 0);
-        // Get the vendor info line
-        read_line(buffer);
-        info.vendor = &buffer[5]; // Chop off the "VEND:" tag
-        // Get the product info line
-        read_line(buffer);
-        info.product = &buffer[5];
-        // Only the URG-04LX supports SCIP1
-        model_ = MODEL_URG04LX;
-        // Get the firmware line
-        read_line(buffer);
-        info.firmware = &buffer[5];
-        // Get the protocol version line
-        read_line(buffer);
-        info.protocol = &buffer[5];
-        // Get the serial number
-        read_line(buffer);
-        info.serial = &buffer[5];
-        // Get either the status line or the end of message
-        read_line(buffer);
-        if(buffer[0] != '\0')
-        {
-            // Got a status line
-            info.sensor_diagnostic = &buffer[5];
-            skip_lines(1);
-        }
-
-        // Check the firmware version major number. If it's >=3 there is
-        // probably some extra info in the firmware line.
-        // eg: FIRM:3.1.04,07/08/02(20-4095[mm],240[deg],44-725[step],600[rpm])
-        // Note that this example is right up against the maximum SCIP v1 line
-        // length of 64 bytes.
-        if(atoi(info.firmware.c_str()) >= 3)
-        {
-            if(verbose_)
-                err_output_ << "SCIP1 Firmware line for parsing: " <<
-                    info.firmware << '\n';
-            // Now the fun part: parsing the line. It would be nice if we could
-            // use the POSIX regex functions, but since MS doesn't believe in
-            // POSIX we get to do it the hard way.
-            // Start by finding the first (
-            char const* valueStart;
-            if((valueStart = strchr(info.firmware.c_str(), '(')) == 0)
-            {
-                // No bracket? Crud. Fail and use the hard-coded values from
-                // the manual.
-                info.calculate_values();
-            }
-            // Now put it through sscanf and hope...
-            int aperture;
-            int numFound = sscanf(valueStart,
-                    "(%d-%d[mm],%d[deg],%d-%d[step],%d[rpm]", &info.min_range,
-                    &info.max_range, &aperture, &info.first_step,
-                    &info.last_step, &info.speed);
-            if(numFound != 6)
-            {
-                // Didn't get enough values out, assume unknown format and fall
-                // back on the defaults
-                info.set_defaults();
-                info.calculate_values();
-                if(verbose_)
-                {
-                    err_output_ << "Retrieved sensor info (hard-coded, not "
-                        "enough values):\n";
-                    err_output_ << info.as_string();
-                }
-            }
-            else
-            {
-                // Need to calculate stuff differently since it gave us an
-                // aperture value
-                info.resolution = DTOR(static_cast<double>(aperture)) /
-                    static_cast<double>(info.last_step - info.first_step);
-                // Assume that the range is evenly spread
-                info.scanable_steps = info.last_step - info.first_step + 1;
-                info.front_step = info.scanable_steps / 2 +
-                    info.first_step - 1;
-                info.min_angle = (static_cast<int>(info.first_step) -
-                        static_cast<int>(info.front_step)) * info.resolution;
-                info.max_angle = (info.last_step - info.front_step) *
-                    info.resolution;
-
-                if(verbose_)
-                {
-                    err_output_ << "Retrieved sensor info (from FIRM line):\n";
-                    err_output_ << info.as_string();
-                }
-            }
-        }
-        else
-        {
-            // We're stuck with hard-coded defaults from the manual (already
-            // set earlier).
-            info.calculate_values();
-            if(verbose_)
-            {
-                err_output_ << "Retrieved sensor info (hard-coded):\n";
-                err_output_ << info.as_string();
-            }
-        }
-    }
-    else if(scip_version_ == 2)
-    {
-        if(verbose_)
-        {
-            err_output_ << "Sensor::" << __func__ <<
-                "() Getting sensor information using SCIP version 2.\n";
-        }
-
-        info.set_defaults();
-
-        char buffer[SCIP2_LINE_LENGTH];
-        memset(buffer, 0, sizeof(char) * SCIP2_LINE_LENGTH);
-
-        // We need to send three commands to get all the info we want: VV, PP
-        // and II
-        send_command("VV", 0, 0, 0);
-        while(read_line_with_check(buffer, -1, true) != 0)
-            process_vv_line(buffer, info);
-
-        // Next up, PP
-        send_command("PP", 0, 0, 0);
-        while(read_line_with_check(buffer, -1, true) != 0)
-            process_pp_line(buffer, info);
-
-        // Command II: Revenge of the Commands.
-        send_command("II", 0, 0, 0);
-        while(read_line_with_check(buffer, -1, true) != 0)
-            process_ii_line(buffer, info);
-
-        enable_checksum_workaround_ = false;
-
-        info.calculate_values();
-        time_resolution_ = static_cast<unsigned int>(info.time_resolution);
-        if(verbose_)
-        {
-            err_output_ << "Retrieved sensor info:\n";
-            err_output_ << info.as_string();
-        }
-    }
-    else
         throw UnknownScipVersionError();
+    }
+    if(verbose_)
+    {
+        err_output_ << "Sensor::" << __func__ <<
+            "() Getting sensor information using SCIP version 2.\n";
+    }
+
+    info.set_defaults();
+
+    char buffer[SCIP2_LINE_LENGTH];
+    memset(buffer, 0, sizeof(char) * SCIP2_LINE_LENGTH);
+
+    // We need to send three commands to get all the info we want: VV, PP
+    // and II
+    send_command("VV", 0, 0, 0);
+    while(read_line_with_check(buffer, -1, true) != 0)
+        process_vv_line(buffer, info);
+
+    // Next up, PP
+    send_command("PP", 0, 0, 0);
+    while(read_line_with_check(buffer, -1, true) != 0)
+        process_pp_line(buffer, info);
+
+    // Command II: Revenge of the Commands.
+    send_command("II", 0, 0, 0);
+    while(read_line_with_check(buffer, -1, true) != 0)
+        process_ii_line(buffer, info);
+
+    enable_checksum_workaround_ = false;
+
+    info.calculate_values();
+    time_resolution_ = static_cast<unsigned int>(info.time_resolution);
+    if(verbose_)
+    {
+        err_output_ << "Retrieved sensor info:\n";
+        err_output_ << info.as_string();
+    }
 }
 
 
@@ -844,26 +538,21 @@ unsigned long long Sensor::get_time()
 
 unsigned int Sensor::get_raw_time()
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(12);
-    else if(scip_version_ == 2)
+    if(scip_version_ != 2)
     {
-        if(verbose_)
-            err_output_ << "Sensor::" << __func__ <<
-                "() Retrieving time from laser.\n";
-        send_command("TM", "0", 1, 0);
-        send_command("TM", "1", 1, 0);
-        char buffer[7];
-        read_line_with_check(buffer, 6);
-        send_command("TM", "2", 1, 0);
-        skip_lines(1);
-        // We need to decode the time value that's in the buffer
-        return decode_4_byte_value(buffer);
-    }
-    else
         throw UnknownScipVersionError();
-
-    return 0;
+    }
+    if(verbose_)
+        err_output_ << "Sensor::" << __func__ <<
+            "() Retrieving time from laser.\n";
+    send_command("TM", "0", 1, 0);
+    send_command("TM", "1", 1, 0);
+    char buffer[7];
+    read_line_with_check(buffer, 6);
+    send_command("TM", "2", 1, 0);
+    skip_lines(1);
+    // We need to decode the time value that's in the buffer
+    return decode_4_byte_value(buffer);
 }
 
 
@@ -969,6 +658,11 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
 unsigned int Sensor::get_ranges(ScanData& data, int start_step,
         int end_step, unsigned int cluster_count)
 {
+    if(scip_version_ != 2)
+    {
+        throw UnknownScipVersionError();
+    }
+
     char buffer[11];
     memset(buffer, 0, sizeof(char) * 11);
 
@@ -986,42 +680,26 @@ unsigned int Sensor::get_ranges(ScanData& data, int start_step,
             '\n';
     }
 
-    if(scip_version_ == 1)
-    {
-        // Send the command to ask for the most recent range data from
-        // start_step to end_step
-        number_to_string(start_step, buffer, 3);
-        number_to_string(end_step, &buffer[3], 3);
-        number_to_string(cluster_count, &buffer[6], 2);
-        send_command("G", buffer, 8, 0);
-        // In SCIP1 mode we're going to get back 2-byte data
-        read_2_byte_range_data(data, num_steps);
-    }
-    else if(scip_version_ == 2)
-    {
-        // Send the command to ask for the most recent range data from
-        // start_step to end_step
-        number_to_string(start_step, buffer, 4);
-        number_to_string(end_step, &buffer[4], 4);
-        number_to_string(cluster_count, &buffer[8], 2);
-        if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
-            send_command("HD", buffer, 10, 0);
-        else
-            send_command("GD", buffer, 10, 0);
-        // There will be a timestamp before the data (if there is data)
-        // Normally we would send 6 for the expected length, but we may get no
-        // timestamp back if there was no data.
-        if(read_line_with_check(buffer) == 0)
-            throw NoDataError();
-        data.laser_time_ = decode_4_byte_value(buffer) +
-            step_to_time_offset(start_step);
-        data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
-        // In SCIP2 mode we're going to get back 3-byte data because we're
-        // sending the GD command
-        read_3_byte_range_data(data, num_steps);
-    }
+    // Send the command to ask for the most recent range data from
+    // start_step to end_step
+    number_to_string(start_step, buffer, 4);
+    number_to_string(end_step, &buffer[4], 4);
+    number_to_string(cluster_count, &buffer[8], 2);
+    if(model_ == MODEL_UXM30LXE && multiecho_mode_ != ME_OFF)
+        send_command("HD", buffer, 10, 0);
     else
-        throw UnknownScipVersionError();
+        send_command("GD", buffer, 10, 0);
+    // There will be a timestamp before the data (if there is data)
+    // Normally we would send 6 for the expected length, but we may get no
+    // timestamp back if there was no data.
+    if(read_line_with_check(buffer) == 0)
+        throw NoDataError();
+    data.laser_time_ = decode_4_byte_value(buffer) +
+        step_to_time_offset(start_step);
+    data.system_time_ = offset_timestamp(wrap_timestamp(data.laser_time_));
+    // In SCIP2 mode we're going to get back 3-byte data because we're
+    // sending the GD command
+    read_3_byte_range_data(data, num_steps);
 
     return data.ranges_length_;
 }
@@ -1056,6 +734,11 @@ unsigned int Sensor::get_ranges_by_angle(ScanData& data, double start_angle,
 unsigned int Sensor::get_ranges_intensities(ScanData& data, int start_step,
         int end_step, unsigned int cluster_count)
 {
+    if(scip_version_ != 2)
+    {
+        throw UnknownScipVersionError();
+    }
+
     char buffer[11];
     memset(buffer, 0, sizeof(char) * 11);
 
@@ -1072,11 +755,6 @@ unsigned int Sensor::get_ranges_intensities(ScanData& data, int start_step,
             end_step << " with a cluster count of " << cluster_count <<
             '\n';
     }
-
-    if(scip_version_ == 1)
-        throw UnsupportedError(36);
-    else if(scip_version_ != 2)
-        throw UnknownScipVersionError();
 
     // Send the command to ask for the most recent data from
     // start_step to end_step
@@ -1132,10 +810,10 @@ unsigned int Sensor::get_ranges_intensities_by_angle(ScanData& data,
 unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
         int end_step, unsigned int cluster_count)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(16);
-    else if(scip_version_ != 2)
+    if(scip_version_ != 2)
+    {
         throw UnknownScipVersionError();
+    }
 
     char buffer[14];
     memset(buffer, 0, sizeof(char) * 14);
@@ -1218,8 +896,10 @@ unsigned int Sensor::get_new_ranges(ScanData& data, int start_step,
 unsigned int Sensor::get_new_ranges_by_angle(ScanData& data,
         double start_angle, double end_angle, unsigned int cluster_count)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(16);
+    if(scip_version_ != 2)
+    {
+        throw UnknownScipVersionError();
+    }
 
     // Calculate the given angles in steps, rounding towards front_step_
     int start_step, end_step;
@@ -1247,10 +927,10 @@ unsigned int Sensor::get_new_ranges_by_angle(ScanData& data,
 unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
         int start_step, int end_step, unsigned int cluster_count)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(17);
-    else if(scip_version_ != 2)
+    if(scip_version_ != 2)
+    {
         throw UnknownScipVersionError();
+    }
 
     char buffer[14];
     memset(buffer, 0, sizeof(char) * 14);
@@ -1334,8 +1014,10 @@ unsigned int Sensor::get_new_ranges_intensities(ScanData& data,
 unsigned int Sensor::get_new_ranges_intensities_by_angle(ScanData& data,
         double start_angle, double end_angle, unsigned int cluster_count)
 {
-    if(scip_version_ == 1)
-        throw UnsupportedError(17);
+    if(scip_version_ != 2)
+    {
+        throw UnknownScipVersionError();
+    }
 
     // Calculate the given angles in steps, rounding towards front_step_
     int start_step, end_step;
@@ -1406,7 +1088,7 @@ void Sensor::clear_read_buffer()
 // not the 0 (although the buffer still has to include this).
 // If expected_length is -1, this function expects buffer to be a certain length
 // to allow up to the maximum line length to be read. See SCIP1_LINE_LENGTH and
-// SCIP2_LINE_LENGTHr
+// SCIP2_LINE_LENGTH.
 // If fast is true, Read() will be called instead of ReadLine(), which should
 // result in a faster, less CPU-intensive read. This is used, for example, when
 // reading the range data.
@@ -1996,7 +1678,9 @@ void Sensor::get_and_set_scip_version()
         // they do, it's an uncaught error.
         int majorVer = strtol(&buffer[5], 0, 10);
         if(errno == ERANGE)
+        {
             throw FirmwareError();
+        }
         if(verbose_)
         {
             err_output_ << "Sensor::" << __func__ <<
@@ -2007,15 +1691,18 @@ void Sensor::get_and_set_scip_version()
         // empty last line)
         skip_lines(3);
 
-        // If the firmware version is less than 3, we're stuck with SCIP
-        // version 1.
+        // If the firmware version is less than 3, the laser does not support
+        // version 2 and so is not supported by this library (use an older
+        // version).
         if(majorVer < 3)
         {
             if(verbose_)
+            {
                 err_output_ << "Sensor::" << __func__ <<
-                    "() Firmware does not support SCIP version 2; using SCIP "
-                    "version 1.\n";
-            return;
+                    "() Firmware does not support SCIP version 2; upgrade " <<
+                    "the firmware or use an older version of HokuyoAIST.\n";
+            }
+            throw UnknownScipVersionError();
         }
         // Otherwise we can try SCIP version 2
         else
@@ -2043,8 +1730,10 @@ void Sensor::get_and_set_scip_version()
 
             // Changed to SCIP version 2
             if(verbose_)
+            {
                 err_output_ << "Sensor::" << __func__ <<
                     "() Using SCIP version 2.\n";
+            }
             scip_version_ = 2;
             return;
         }

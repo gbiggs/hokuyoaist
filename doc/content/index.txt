@@ -129,3 +129,13 @@ Industrial Science and Technology. Approval number H22PRO-1195. This
 software is licensed under the Lesser General Public License. See
 COPYING.LESSER.
 
+
+Changelist
+==========
+
+4.0
+
+- Removed support for serial connections (note: not serial-over-USB, which is
+  what all current non-ethernet Hokuyo sensors use).
+- Removed SCIP 1.0 support.
+

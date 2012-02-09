@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     double start_angle(0.0), end_angle(0.0);
     int first_step(-1), last_step(-1);
     int multiecho_mode(0);
-    unsigned int baud(19200), speed(0), cluster_count(1);
+    unsigned int speed(0), cluster_count(1);
     bool get_intensities(false), get_new(false), verbose(false);
 
 #if defined(WIN32)
@@ -52,9 +52,6 @@ int main(int argc, char **argv)
     {
         switch(opt)
         {
-            case 'b':
-                sscanf(optarg, "%d", &baud);
-                break;
             case 'c':
                 sscanf(optarg, "%d", &cluster_count);
                 break;
@@ -92,8 +89,6 @@ int main(int argc, char **argv)
             case 'h':
             default:
                 std::cout << "Usage: " << argv[0] << " [options]\n\n";
-                std::cout << "-b baud\t\tBaud rate to set the laser to "
-                    "*after* connecting.\n";
                 std::cout << "-c count\tCluster count.\n";
                 std::cout << "-e angle\tEnd angle to get ranges to.\n";
                 std::cout << "-f step\t\tFirst step to get ranges from.\n";
@@ -135,23 +130,6 @@ int main(int argc, char **argv)
 
         // Turn the laser on
         laser.set_power(true);
-        // Set the baud rate
-        try
-        {
-            laser.set_baud(baud);
-        }
-        catch(hokuyoaist::BaudrateError &e)
-        {
-            std::cerr << "Failed to change baud rate: " << e.what() << '\n';
-        }
-        catch(hokuyoaist::ResponseError &e)
-        {
-            std::cerr << "Failed to change baud rate: " << e.what() << '\n';
-        }
-        catch(...)
-        {
-            std::cerr << "Failed to change baud rate\n";
-        }
         // Set the motor speed
         try
         {

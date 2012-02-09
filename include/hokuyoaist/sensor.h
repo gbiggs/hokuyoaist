@@ -117,7 +117,7 @@ typedef struct IPAddr
 /** @brief Hokuyo laser scanner class.
 
 Provides an interface for interacting with a Hokuyo laser scanner using SCIP
-protocol version 1 or 2. The FlexiPort library is used to implement the data
+protocol version 2. The FlexiPort library is used to implement the data
 communications with the scanner. See its documentation for details on
 controlling the connection.
 
@@ -137,18 +137,6 @@ class HOKUYOAIST_EXPORT Sensor
         /// @brief Open the laser scanner and begin scanning.
         void open(std::string port_options);
 
-        /** @brief Open the laser scanner and begin scanning, probing the baud
-        rate.
-
-        If the port is a serial connection and communication with the laser
-        fails at the given baud rate, the alternative baud rates supported by
-        the device are tried (see @ref set_baud for these) in order from fastest
-        to slowest.
-
-        @return The baud rate at which connection with the laser succeeded, or
-        0 for non-serial connections. */
-        unsigned int open_with_probing(std::string port_options);
-
         /// @brief Close the connection to the laser scanner.
         void close();
 
@@ -157,12 +145,6 @@ class HOKUYOAIST_EXPORT Sensor
 
         /// @brief Switch the laser scanner on or off.
         void set_power(bool on);
-
-        /** @brief Change the baud rate when using a serial connection.
-
-        Valid rates are 19.2Kbps, 38.4Kbps, 57.6Kbps, 115.2Kbps, 250.0Kbps,
-        500.0Kbps, 750.0Kbps (dependent on those available in FlexiPort). */
-        void set_baud(unsigned int baud);
 
         /** @brief Change the IP address information.
 
@@ -173,9 +155,7 @@ class HOKUYOAIST_EXPORT Sensor
         void set_ip(IPAddr const& addr, IPAddr const& subnet,
                 IPAddr const& gateway);
 
-        /** @brief Reset the laser scanner to its default settings.
-
-        Not available with the SCIP v1 protocol. */
+        /// @brief Reset the laser scanner to its default settings.
         void reset();
 
         /** @brief Reset everything except motor and serial speed.
@@ -191,27 +171,20 @@ class HOKUYOAIST_EXPORT Sensor
         minute that these correspond to will depend on the scanner model. For
         example, for a URG-04LX, they are (from 1 to 10) 594, 588, 576, 570,
         564, 558, 552, 546, and 540 rpm.
-
-        Not available with the SCIP v1 protocol. */
+        */
         void set_motor_speed(unsigned int speed);
 
         /** @brief Switch the scanner between normal and high sensitivity
         modes. */
         void set_high_sensitivity(bool on);
 
-        /** @brief Get various information about the scanner.
-
-        Much of the information is not available with the SCIP v1 protocol. */
+        /// @brief Get various information about the scanner.
         void get_sensor_info(SensorInfo& info);
 
-        /** @brief Get the value of the scanner's clock in milliseconds.
-
-        Not available with the SCIP v1 protocol. */
+        /// @brief Get the value of the scanner's clock in milliseconds.
         unsigned long long get_time();
 
-        /** @brief Get the raw value of the scanner's clock in milliseconds.
-
-        Not available with the SCIP v1 protocol. */
+        /// @brief Get the raw value of the scanner's clock in milliseconds.
         unsigned int get_raw_time();
 
         /** @brief Calibrate the time offset between the laser and computer.
@@ -381,8 +354,6 @@ class HOKUYOAIST_EXPORT Sensor
         scans can be retrieved using this function is less than with @ref
         get_ranges. Otherwise behaves identicallty to @ref get_ranges.
 
-        Not available with the SCIP v1 protocol.
-
         @note The command used to retrieve a fresh scan is also used for the
         continuous scanning mode (not yet supported by this library). After
         completing a scan, it will turn the laser off (in anticipation of
@@ -405,8 +376,6 @@ class HOKUYOAIST_EXPORT Sensor
                 int end_step = -1, unsigned int cluster_count = 1);
 
         /** @brief Get a new scan from the scanner.
-
-        Not available with the SCIP v1 protocol.
 
         @param data Pointer to a @ref ScanData object to store the range
         readings in.
@@ -431,8 +400,6 @@ class HOKUYOAIST_EXPORT Sensor
         while the scanner performs the scan.  Otherwise behaves identicallty to
         @ref get_ranges.
 
-        Not available with the SCIP v1 protocol.
-
         @note The command used to retrieve a fresh scan is also used for the
         continuous scanning mode (not yet supported by this library). After
         completing a scan, it will turn the laser off (in anticipation of
@@ -456,8 +423,6 @@ class HOKUYOAIST_EXPORT Sensor
                 unsigned int cluster_count = 1);
 
         /** @brief Get a new scan from the scanner with intensity data.
-
-        Not available with the SCIP v1 protocol.
 
         @param data Pointer to a @ref ScanData object to store the range
         readings in.
