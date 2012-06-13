@@ -1,4 +1,4 @@
-#include <hokuyoaist.h>
+#include <hokuyoaist/hokuyoaist.h>
 using namespace hokuyoaist;
 
 #include <boost/python.hpp>
@@ -175,11 +175,9 @@ BOOST_PYTHON_MODULE(hokuyoaist)
 
     class_<Sensor>("Sensor")
         .def("open", &Sensor::open)
-        .def("open_with_probing", &Sensor::open_with_probing)
         .def("close", &Sensor::close)
         .def("is_open", &Sensor::is_open)
         .def("set_power", &Sensor::set_power)
-        .def("set_baud", &Sensor::set_baud)
         .def("set_ip", &Sensor::set_ip)
         .def("reset", &Sensor::reset)
         .def("semi_reset", &Sensor::semi_reset)
