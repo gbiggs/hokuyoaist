@@ -31,6 +31,7 @@
 #include <hokuyoaist/hokuyoaist.h>
 #include <hokuyoaist/hokuyo_errors.h>
 #include <iostream>
+#include <unistd.h>
 
 
 int main(int argc, char **argv)
