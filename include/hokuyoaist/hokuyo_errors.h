@@ -80,7 +80,11 @@ class HOKUYOAIST_EXPORT BaseError : public std::exception
         virtual char const* error_type() const throw()
             { return error_type_; }
 
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
         virtual const char* what() throw();
+#endif
 
     protected:
         /** Description code for use with the error string table. */
@@ -170,7 +174,11 @@ class HOKUYOAIST_EXPORT BaudrateError: public RuntimeError
         unsigned int baud() const throw()
             { return baud_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Baud rate that caused the error. */
@@ -368,7 +376,11 @@ class HOKUYOAIST_EXPORT ChecksumError: public ProtocolError
         virtual int calculated() const throw()
             { return calculated_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Expected checksum value. */
@@ -411,7 +423,11 @@ class HOKUYOAIST_EXPORT UnknownLineError: public ProtocolError
         virtual char const* const line() const throw()
             { return line_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** The mystery line. */
@@ -436,7 +452,11 @@ class HOKUYOAIST_EXPORT ParseError: public ProtocolError
         virtual char const* const type() const throw()
             { return type_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** The bad line. */
@@ -487,7 +507,11 @@ class HOKUYOAIST_EXPORT ResponseError: public ProtocolError
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Error code as defined in SCIP2 (two bytes). */
@@ -522,7 +546,11 @@ class HOKUYOAIST_EXPORT Scip1ResponseError: public ProtocolError
         virtual char cmd_code() const throw()
             { return cmd_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Error code as defined in SCIP2 (two bytes). */
@@ -563,7 +591,11 @@ class HOKUYOAIST_EXPORT CommandEchoError: public ProtocolError
         virtual char const* const cmd_echo() const throw()
             { return echo_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Command that triggered the error, from SCIP2 (two bytes). */
@@ -596,7 +628,11 @@ class HOKUYOAIST_EXPORT ParamEchoError: public ProtocolError
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Command that triggered the error, from SCIP2 (two bytes). */
@@ -627,7 +663,11 @@ class HOKUYOAIST_EXPORT InsufficientBytesError: public ProtocolError
         virtual int line_length() const throw()
             { return line_length_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** Number of bytes available. */
@@ -660,7 +700,11 @@ class HOKUYOAIST_EXPORT LineLengthError: public ProtocolError
         virtual int expected() const throw()
             { return expected_; }
 
-        const char* what() throw();
+#if __GLIBCXX__
+        virtual const char* what() const throw();
+#else
+        virtual const char* what() throw();
+#endif
 
     protected:
         /** The received line length. */
