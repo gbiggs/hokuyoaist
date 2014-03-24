@@ -80,7 +80,7 @@ class HOKUYOAIST_EXPORT BaseError : public std::exception
         virtual char const* error_type() const throw()
             { return error_type_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -174,7 +174,7 @@ class HOKUYOAIST_EXPORT BaudrateError: public RuntimeError
         unsigned int baud() const throw()
             { return baud_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -376,7 +376,7 @@ class HOKUYOAIST_EXPORT ChecksumError: public ProtocolError
         virtual int calculated() const throw()
             { return calculated_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -423,7 +423,7 @@ class HOKUYOAIST_EXPORT UnknownLineError: public ProtocolError
         virtual char const* const line() const throw()
             { return line_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -452,7 +452,7 @@ class HOKUYOAIST_EXPORT ParseError: public ProtocolError
         virtual char const* const type() const throw()
             { return type_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -507,7 +507,7 @@ class HOKUYOAIST_EXPORT ResponseError: public ProtocolError
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -546,7 +546,7 @@ class HOKUYOAIST_EXPORT Scip1ResponseError: public ProtocolError
         virtual char cmd_code() const throw()
             { return cmd_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -591,7 +591,7 @@ class HOKUYOAIST_EXPORT CommandEchoError: public ProtocolError
         virtual char const* const cmd_echo() const throw()
             { return echo_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -628,7 +628,7 @@ class HOKUYOAIST_EXPORT ParamEchoError: public ProtocolError
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -663,7 +663,7 @@ class HOKUYOAIST_EXPORT InsufficientBytesError: public ProtocolError
         virtual int line_length() const throw()
             { return line_length_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();
@@ -700,7 +700,7 @@ class HOKUYOAIST_EXPORT LineLengthError: public ProtocolError
         virtual int expected() const throw()
             { return expected_; }
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
         virtual const char* what() const throw();
 #else
         virtual const char* what() throw();

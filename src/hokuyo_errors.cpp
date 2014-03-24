@@ -377,7 +377,7 @@ BaseError::BaseError(BaseError const& rhs)
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* BaseError::what() const throw()
 #else
 const char* BaseError::what() throw()
@@ -389,7 +389,7 @@ const char* BaseError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* BaudrateError::what() const throw()
 #else
 const char* BaudrateError::what() throw()
@@ -401,7 +401,7 @@ const char* BaudrateError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* ChecksumError::what() const throw()
 #else
 const char* ChecksumError::what() throw()
@@ -427,7 +427,7 @@ UnknownLineError::UnknownLineError(UnknownLineError const& rhs)
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* UnknownLineError::what() const throw()
 #else
 const char* UnknownLineError::what() throw()
@@ -455,7 +455,7 @@ ParseError::ParseError(ParseError const& rhs)
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* ParseError::what() const throw()
 #else
 const char* ParseError::what() throw()
@@ -467,7 +467,7 @@ const char* ParseError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* ResponseError::what() const throw()
 #else
 const char* ResponseError::what() throw()
@@ -481,7 +481,7 @@ const char* ResponseError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* Scip1ResponseError::what() const throw()
 #else
 const char* Scip1ResponseError::what() throw()
@@ -494,7 +494,7 @@ const char* Scip1ResponseError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* CommandEchoError::what() const throw()
 #else
 const char* CommandEchoError::what() throw()
@@ -507,7 +507,7 @@ const char* CommandEchoError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* ParamEchoError::what() const throw()
 #else
 const char* ParamEchoError::what() throw()
@@ -519,7 +519,7 @@ const char* ParamEchoError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* InsufficientBytesError::what() const throw()
 #else
 const char* InsufficientBytesError::what() throw()
@@ -532,7 +532,7 @@ const char* InsufficientBytesError::what() throw()
 }
 
 
-#if __GLIBCXX__
+#if __cplusplus >= 201103L
 const char* LineLengthError::what() const throw()
 #else
 const char* LineLengthError::what() throw()
