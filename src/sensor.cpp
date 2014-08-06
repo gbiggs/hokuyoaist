@@ -1772,7 +1772,7 @@ void Sensor::find_model(char const* buffer)
     {
         model_ = MODEL_UHG08LX;
     }
-    else if(strstr(buffer, "UTM-30LX") != 0)
+    else if(strstr(buffer, "UTM-30LX") != 0 || strstr(buffer, "UTM-X002S") != 0)
     {
         model_ = MODEL_UTM30LX;
         // Also enable the work around for a checksum problem in this
