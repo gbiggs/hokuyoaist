@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 project(HokuyoAIST)
 string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
 include(${PROJECT_SOURCE_DIR}/cmake/hokuyoaist_utils.cmake)
