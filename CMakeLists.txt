@@ -17,7 +17,7 @@ add_custom_target(uninstall "${CMAKE_COMMAND}" -P
     "${PROJECT_BINARY_DIR}/uninstall_target.cmake")
 
 option(BUILD_EXAMPLES "Build and install examples" ON)
-option(BUILD_PYTHON_BINDINGS "Build Python bindings" OFF)
+option(BUILD_PYTHON_BINDINGS "Build Python bindings" ON)
 option(BUILD_DOCUMENTATION "Build the documentation" ON)
 
 option(HOKUYOAIST_STATIC_LIBS "Build static libraries" OFF)

@@ -377,7 +377,11 @@ BaseError::BaseError(BaseError const& rhs)
 }
 
 
+#if __cplusplus >= 201103L
+const char* BaseError::what() const throw()
+#else
 const char* BaseError::what() throw()
+#endif
 {
     ss << error_type_ << " (" << desc_code_ << "): " <<
         desc_code_to_string(desc_code_);
@@ -385,7 +389,11 @@ const char* BaseError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* BaudrateError::what() const throw()
+#else
 const char* BaudrateError::what() throw()
+#endif
 {
     RuntimeError::what();
     ss << baud_;
@@ -393,7 +401,11 @@ const char* BaudrateError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* ChecksumError::what() const throw()
+#else
 const char* ChecksumError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << "expected " << expected_ << ", calculated " << calculated_;
@@ -415,7 +427,11 @@ UnknownLineError::UnknownLineError(UnknownLineError const& rhs)
 }
 
 
+#if __cplusplus >= 201103L
+const char* UnknownLineError::what() const throw()
+#else
 const char* UnknownLineError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << line_;
@@ -439,7 +455,11 @@ ParseError::ParseError(ParseError const& rhs)
 }
 
 
+#if __cplusplus >= 201103L
+const char* ParseError::what() const throw()
+#else
 const char* ParseError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << "Line type: " << type_ << ". Line: " << line_;
@@ -447,7 +467,11 @@ const char* ParseError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* ResponseError::what() const throw()
+#else
 const char* ResponseError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Command: " << cmd_[0] << cmd_[1];
@@ -457,7 +481,11 @@ const char* ResponseError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* Scip1ResponseError::what() const throw()
+#else
 const char* Scip1ResponseError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Command: " << cmd_;
@@ -466,7 +494,11 @@ const char* Scip1ResponseError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* CommandEchoError::what() const throw()
+#else
 const char* CommandEchoError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Command: " << cmd_[0] << cmd_[1];
@@ -475,7 +507,11 @@ const char* CommandEchoError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* ParamEchoError::what() const throw()
+#else
 const char* ParamEchoError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Command: " << cmd_[0] << cmd_[1];
@@ -483,7 +519,11 @@ const char* ParamEchoError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* InsufficientBytesError::what() const throw()
+#else
 const char* InsufficientBytesError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Number of bytes: " << num_;
@@ -492,7 +532,11 @@ const char* InsufficientBytesError::what() throw()
 }
 
 
+#if __cplusplus >= 201103L
+const char* LineLengthError::what() const throw()
+#else
 const char* LineLengthError::what() throw()
+#endif
 {
     ProtocolError::what();
     ss << " Received length: " << length_;

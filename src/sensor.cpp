@@ -55,6 +55,10 @@ using namespace hokuyoaist;
     #include <unistd.h>
 #endif
 
+#if defined(__APPLE__)
+    #include <sys/time.h>
+#endif
+
 namespace hokuyoaist
 {
 
@@ -1701,7 +1705,7 @@ unsigned int Sensor::get_timing_mode_time(unsigned long long* reception_time)
 /// Get the computer's time as accurately as possible.
 unsigned long long Sensor::get_computer_time()
 {
-#if defined(_POSIX_TIMERS)
+#if defined(_POSIX_TIMERS) && !defined(__APPLE__)
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     return ts.tv_sec * 1e9 + ts.tv_nsec;
@@ -1768,7 +1772,7 @@ void Sensor::find_model(char const* buffer)
     {
         model_ = MODEL_UHG08LX;
     }
-    else if(strstr(buffer, "UTM-30LX") != 0)
+    else if(strstr(buffer, "UTM-30LX") != 0 || strstr(buffer, "UTM-X002S") != 0)
     {
         model_ = MODEL_UTM30LX;
         // Also enable the work around for a checksum problem in this
