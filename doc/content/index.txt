@@ -29,7 +29,7 @@ separately.
 Flexiport is available from GitHub_.
 
 .. _github:
-   http://www.gibhub.com/gbiggs/flexiport
+   http://www.github.com/gbiggs/flexiport
 
 
 Examples
