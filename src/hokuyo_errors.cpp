@@ -385,7 +385,8 @@ const char* BaseError::what() throw()
 {
     ss << error_type_ << " (" << desc_code_ << "): " <<
         desc_code_to_string(desc_code_);
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -397,7 +398,8 @@ const char* BaudrateError::what() throw()
 {
     RuntimeError::what();
     ss << baud_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -409,7 +411,8 @@ const char* ChecksumError::what() throw()
 {
     ProtocolError::what();
     ss << "expected " << expected_ << ", calculated " << calculated_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -435,7 +438,8 @@ const char* UnknownLineError::what() throw()
 {
     ProtocolError::what();
     ss << line_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -463,7 +467,8 @@ const char* ParseError::what() throw()
 {
     ProtocolError::what();
     ss << "Line type: " << type_ << ". Line: " << line_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -477,7 +482,8 @@ const char* ResponseError::what() throw()
     ss << " Command: " << cmd_[0] << cmd_[1];
     ss << " Error : (" << error_[0] << error_[1] << ") " <<
         scip2_error_to_string(error_, cmd_);
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -490,7 +496,8 @@ const char* Scip1ResponseError::what() throw()
     ProtocolError::what();
     ss << " Command: " << cmd_;
     ss << " Error : " << error_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -503,7 +510,8 @@ const char* CommandEchoError::what() throw()
     ProtocolError::what();
     ss << " Command: " << cmd_[0] << cmd_[1];
     ss << " Received echo: " << echo_[0] << echo_[1];
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -515,7 +523,8 @@ const char* ParamEchoError::what() throw()
 {
     ProtocolError::what();
     ss << " Command: " << cmd_[0] << cmd_[1];
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -528,7 +537,8 @@ const char* InsufficientBytesError::what() throw()
     ProtocolError::what();
     ss << " Number of bytes: " << num_;
     ss << " Line length: " << line_length_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 
@@ -541,7 +551,8 @@ const char* LineLengthError::what() throw()
     ProtocolError::what();
     ss << " Received length: " << length_;
     ss << " Expected line length: " << expected_;
-    return ss.str().c_str();
+    ss_str = ss.str();
+    return ss_str.c_str();;
 }
 
 }; // namespace hokuyoaist
