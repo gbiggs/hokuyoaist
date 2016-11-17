@@ -367,59 +367,46 @@ BaseError::BaseError(unsigned int desc_code, char const* error_type)
     : desc_code_(desc_code)
 {
     strncpy(error_type_, error_type, 32);
+    std::stringstream ss;
+    ss << error_type_ << " (" << desc_code_ << "): " <<
+        desc_code_to_string(desc_code_);
+    error_str_ = ss.str();
 }
 
 
 BaseError::BaseError(BaseError const& rhs)
-    : desc_code_(rhs.desc_code())
+    : desc_code_(rhs.desc_code()),
+    error_str_(rhs.error_str_)
 {
     strncpy(error_type_, rhs.error_type(), 32);
 }
 
-
-#if __cplusplus >= 201103L
 const char* BaseError::what() const throw()
-#else
-const char* BaseError::what() throw()
-#endif
 {
-    ss << error_type_ << " (" << desc_code_ << "): " <<
-        desc_code_to_string(desc_code_);
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    return error_str_.c_str();
 }
 
-
-#if __cplusplus >= 201103L
-const char* BaudrateError::what() const throw()
-#else
-const char* BaudrateError::what() throw()
-#endif
+BaudrateError::BaudrateError(unsigned int baud)
+    : RuntimeError(6, "BaudrateError"), baud_(baud)
 {
-    RuntimeError::what();
+    std::stringstream ss;
     ss << baud_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
 }
 
-
-#if __cplusplus >= 201103L
-const char* ChecksumError::what() const throw()
-#else
-const char* ChecksumError::what() throw()
-#endif
+ChecksumError::ChecksumError(int expected, int calculated)
+    : ProtocolError(24, "ChecksumError"), expected_(expected), calculated_(calculated)
 {
-    ProtocolError::what();
+    std::stringstream ss;
     ss << "expected " << expected_ << ", calculated " << calculated_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
 }
-
 
 UnknownLineError::UnknownLineError(char const* const line)
     : ProtocolError(27, "UnknownLineError")
 {
     strncpy(line_, line, 128);
+    error_str_ += std::string(line);
 }
 
 
@@ -429,25 +416,14 @@ UnknownLineError::UnknownLineError(UnknownLineError const& rhs)
     strncpy(line_, rhs.line(), 128);
 }
 
-
-#if __cplusplus >= 201103L
-const char* UnknownLineError::what() const throw()
-#else
-const char* UnknownLineError::what() throw()
-#endif
-{
-    ProtocolError::what();
-    ss << line_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
-}
-
-
 ParseError::ParseError(char const* const line, char const* const type)
     : ProtocolError(28, "ParseError")
 {
     strncpy(line_, line, 128);
     strncpy(type_, type, 16);
+    std::stringstream ss;
+    ss << "Line type: " << type_ << ". Line: " << line_;
+    error_str_ += ss.str();
 }
 
 
@@ -458,102 +434,107 @@ ParseError::ParseError(ParseError const& rhs)
     strncpy(type_, rhs.type(), 16);
 }
 
-
-#if __cplusplus >= 201103L
-const char* ParseError::what() const throw()
-#else
-const char* ParseError::what() throw()
-#endif
+ResponseError::ResponseError(char const* const error, char const* const cmd)
+    : ProtocolError(30, "ResponseError")
 {
-    ProtocolError::what();
-    ss << "Line type: " << type_ << ". Line: " << line_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
-}
-
-
-#if __cplusplus >= 201103L
-const char* ResponseError::what() const throw()
-#else
-const char* ResponseError::what() throw()
-#endif
-{
-    ProtocolError::what();
+    error_[0] = error[0]; error_[1] = error[1];
+    cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
+    std::stringstream ss;
     ss << " Command: " << cmd_[0] << cmd_[1];
     ss << " Error : (" << error_[0] << error_[1] << ") " <<
         scip2_error_to_string(error_, cmd_);
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
+}
+ResponseError::ResponseError(ResponseError const& rhs)
+    : ProtocolError(rhs)
+{
+    error_[0] = rhs.error_code()[0];
+    error_[1] = rhs.error_code()[1];
+    cmd_[0] = rhs.cmd_code()[0];
+    cmd_[1] = rhs.cmd_code()[1];
 }
 
-
-#if __cplusplus >= 201103L
-const char* Scip1ResponseError::what() const throw()
-#else
-const char* Scip1ResponseError::what() throw()
-#endif
+Scip1ResponseError::Scip1ResponseError(char error, char cmd)
+    : ProtocolError(30, "Scip1ResponseError"),
+    error_(error), cmd_(cmd)
 {
-    ProtocolError::what();
+    std::stringstream ss;
     ss << " Command: " << cmd_;
     ss << " Error : " << error_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
+}
+Scip1ResponseError::Scip1ResponseError(Scip1ResponseError const& rhs)
+    : ProtocolError(rhs), error_(rhs.error_code()),
+    cmd_(rhs.cmd_code())
+{
 }
 
-
-#if __cplusplus >= 201103L
-const char* CommandEchoError::what() const throw()
-#else
-const char* CommandEchoError::what() throw()
-#endif
+CommandEchoError::CommandEchoError(char const* const cmd, char const* const echo)
+    : ProtocolError(31, "CommandEchoError")
 {
-    ProtocolError::what();
+    cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
+    echo_[0] = echo[0]; echo_[1] = echo[1];
+    std::stringstream ss;
     ss << " Command: " << cmd_[0] << cmd_[1];
     ss << " Received echo: " << echo_[0] << echo_[1];
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
+
+}
+CommandEchoError::CommandEchoError(CommandEchoError const& rhs)
+    : ProtocolError(rhs)
+{
+    cmd_[0] = rhs.cmd_code()[0];
+    cmd_[1] = rhs.cmd_code()[1];
+    echo_[0] = rhs.cmd_echo()[0];
+    echo_[1] = rhs.cmd_echo()[1];
 }
 
-
-#if __cplusplus >= 201103L
-const char* ParamEchoError::what() const throw()
-#else
-const char* ParamEchoError::what() throw()
-#endif
+ParamEchoError::ParamEchoError(char const* const cmd)
+    : ProtocolError(32, "ParamEchoError")
 {
-    ProtocolError::what();
+    cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
+    std::stringstream ss;
     ss << " Command: " << cmd_[0] << cmd_[1];
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
 }
 
-
-#if __cplusplus >= 201103L
-const char* InsufficientBytesError::what() const throw()
-#else
-const char* InsufficientBytesError::what() throw()
-#endif
+ParamEchoError::ParamEchoError(ParamEchoError const& rhs)
+    : ProtocolError(rhs)
 {
-    ProtocolError::what();
+    cmd_[0] = rhs.cmd_code()[0];
+    cmd_[1] = rhs.cmd_code()[1];
+}
+
+InsufficientBytesError::InsufficientBytesError(int num, int line_length)
+    : ProtocolError(33, "InsufficientBytesError"),
+    num_(num), line_length_(line_length)
+{
+    std::stringstream ss;
     ss << " Number of bytes: " << num_;
     ss << " Line length: " << line_length_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
+}
+InsufficientBytesError::InsufficientBytesError(InsufficientBytesError const& rhs)
+    : ProtocolError(rhs), num_(rhs.num()),
+    line_length_(rhs.line_length())
+{
 }
 
-
-#if __cplusplus >= 201103L
-const char* LineLengthError::what() const throw()
-#else
-const char* LineLengthError::what() throw()
-#endif
+LineLengthError::LineLengthError(int length, int expected)
+    : ProtocolError(34, "LineLengthError"),
+    length_(length), expected_(expected)
 {
-    ProtocolError::what();
+    std::stringstream ss;
     ss << " Received length: " << length_;
     ss << " Expected line length: " << expected_;
-    ss_str = ss.str();
-    return ss_str.c_str();;
+    error_str_ += ss.str();
 }
 
-}; // namespace hokuyoaist
+LineLengthError::LineLengthError(LineLengthError const& rhs)
+    : ProtocolError(rhs), length_(rhs.length()),
+    expected_(rhs.expected())
+{
+}
+
+} // namespace hokuyoaist
 

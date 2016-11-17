@@ -72,7 +72,7 @@ class HOKUYOAIST_EXPORT BaseError : public std::exception
         */
         BaseError(unsigned int desc_code, char const* error_type);
         BaseError(BaseError const& rhs);
-        virtual ~BaseError() throw() {};
+        virtual ~BaseError() throw() {}
 
         virtual unsigned int desc_code() const throw()
             { return desc_code_; }
@@ -80,19 +80,15 @@ class HOKUYOAIST_EXPORT BaseError : public std::exception
         virtual char const* error_type() const throw()
             { return error_type_; }
 
-#if __cplusplus >= 201103L
         virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Description code for use with the error string table. */
         unsigned int desc_code_;
 
         /** Formatted description of the error. */
-        std::stringstream ss;
-        std::string ss_str;
+        std::string error_str_;
+
         /** String representation of the error. */
         char error_type_[32];
 }; //class BaseError
@@ -128,7 +124,7 @@ class HOKUYOAIST_EXPORT RuntimeError : public BaseError
         RuntimeError(unsigned int desc_code, char const* error_type)
             : BaseError(desc_code, error_type)
         {}
-        virtual ~RuntimeError() throw() {};
+        virtual ~RuntimeError() throw() {}
 }; // class RuntimeError
 
 
@@ -165,21 +161,11 @@ class HOKUYOAIST_EXPORT BaudrateError: public RuntimeError
         /** @brief Baud rate error constructor.
 
         @param baud The bad baud rate. */
-        BaudrateError(unsigned int baud)
-            : RuntimeError(6, "BaudrateError"), baud_(baud)
-        {}
-        BaudrateError(BaudrateError const& rhs)
-            : RuntimeError(rhs), baud_(rhs.baud())
-        {}
+        BaudrateError(unsigned int baud);
+        BaudrateError(BaudrateError const& rhs);
 
         unsigned int baud() const throw()
             { return baud_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Baud rate that caused the error. */
@@ -362,26 +348,14 @@ class HOKUYOAIST_EXPORT ChecksumError: public ProtocolError
 
         @param expected The expected checksum.
         @param calculated The calculated checksum. */
-        ChecksumError(int expected, int calculated)
-            : ProtocolError(24, "ChecksumError"), expected_(expected),
-            calculated_(calculated)
-        {}
-        ChecksumError(ChecksumError const& rhs)
-            : ProtocolError(rhs), expected_(rhs.expected()),
-            calculated_(rhs.calculated())
-        {}
+        ChecksumError(int expected, int calculated);
+        ChecksumError(ChecksumError const& rhs);
 
         virtual int expected() const throw()
             { return expected_; }
 
         virtual int calculated() const throw()
             { return calculated_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Expected checksum value. */
@@ -424,12 +398,6 @@ class HOKUYOAIST_EXPORT UnknownLineError: public ProtocolError
         virtual char const* const line() const throw()
             { return line_; }
 
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
-
     protected:
         /** The mystery line. */
         char line_[128];
@@ -452,12 +420,6 @@ class HOKUYOAIST_EXPORT ParseError: public ProtocolError
 
         virtual char const* const type() const throw()
             { return type_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** The bad line. */
@@ -485,20 +447,8 @@ class HOKUYOAIST_EXPORT ResponseError: public ProtocolError
 
         @param error The two-byte error code received.
         @param cmd The command that caused the error. */
-        ResponseError(char const* const error, char const* const cmd)
-            : ProtocolError(30, "ResponseError")
-        {
-            error_[0] = error[0]; error_[1] = error[1];
-            cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
-        }
-        ResponseError(ResponseError const& rhs)
-            : ProtocolError(rhs)
-        {
-            error_[0] = rhs.error_code()[0];
-            error_[1] = rhs.error_code()[1];
-            cmd_[0] = rhs.cmd_code()[0];
-            cmd_[1] = rhs.cmd_code()[1];
-        }
+        ResponseError(char const* const error, char const* const cmd);
+        ResponseError(ResponseError const& rhs);
 
         /// Get the two-byte error code as a non-null-terminated array.
         virtual char const* const error_code() const throw()
@@ -507,12 +457,6 @@ class HOKUYOAIST_EXPORT ResponseError: public ProtocolError
         /// Get the two-byte command code as a non-null-terminated array.
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Error code as defined in SCIP2 (two bytes). */
@@ -530,15 +474,8 @@ class HOKUYOAIST_EXPORT Scip1ResponseError: public ProtocolError
 
         @param error The two-byte error code received.
         @param cmd The command that caused the error. */
-        Scip1ResponseError(char error, char cmd)
-            : ProtocolError(30, "Scip1ResponseError"),
-            error_(error), cmd_(cmd)
-        {}
-        Scip1ResponseError(Scip1ResponseError const& rhs)
-            : ProtocolError(rhs), error_(rhs.error_code()),
-            cmd_(rhs.cmd_code())
-        {}
-
+        Scip1ResponseError(char error, char cmd);
+        Scip1ResponseError(Scip1ResponseError const& rhs);
         /// Get the one-byte error code.
         virtual char error_code() const throw()
             { return error_; }
@@ -546,12 +483,6 @@ class HOKUYOAIST_EXPORT Scip1ResponseError: public ProtocolError
         /// Get the one-byte command code.
         virtual char cmd_code() const throw()
             { return cmd_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Error code as defined in SCIP2 (two bytes). */
@@ -569,20 +500,8 @@ class HOKUYOAIST_EXPORT CommandEchoError: public ProtocolError
 
         @param cmd The two-byte command code expected.
         @param echo The two-byte command echo received. */
-        CommandEchoError(char const* const cmd, char const* const echo)
-            : ProtocolError(31, "CommandEchoError")
-        {
-            cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
-            echo_[0] = echo[0]; echo_[1] = echo[1];
-        }
-        CommandEchoError(CommandEchoError const& rhs)
-            : ProtocolError(rhs)
-        {
-            cmd_[0] = rhs.cmd_code()[0];
-            cmd_[1] = rhs.cmd_code()[1];
-            echo_[0] = rhs.cmd_echo()[0];
-            echo_[1] = rhs.cmd_echo()[1];
-        }
+        CommandEchoError(char const* const cmd, char const* const echo);
+        CommandEchoError(CommandEchoError const& rhs);
 
         /// Get the two-byte command code as a non-null-terminated array.
         virtual char const* const cmd_code() const throw()
@@ -591,12 +510,6 @@ class HOKUYOAIST_EXPORT CommandEchoError: public ProtocolError
         /// Get the two-byte command echo as a non-null-terminated array.
         virtual char const* const cmd_echo() const throw()
             { return echo_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Command that triggered the error, from SCIP2 (two bytes). */
@@ -613,27 +526,12 @@ class HOKUYOAIST_EXPORT ParamEchoError: public ProtocolError
         /** @brief Parameter echo error constructor.
 
         @param cmd The two-byte command code sent. */
-        ParamEchoError(char const* const cmd)
-            : ProtocolError(32, "ParamEchoError")
-        {
-            cmd_[0] = cmd[0]; cmd_[1] = cmd[1];
-        }
-        ParamEchoError(ParamEchoError const& rhs)
-            : ProtocolError(rhs)
-        {
-            cmd_[0] = rhs.cmd_code()[0];
-            cmd_[1] = rhs.cmd_code()[1];
-        }
+        ParamEchoError(char const* const cmd);
+        ParamEchoError(ParamEchoError const& rhs);
 
         /// Get the two-byte command code as a non-null-terminated array.
         virtual char const* const cmd_code() const throw()
             { return cmd_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Command that triggered the error, from SCIP2 (two bytes). */
@@ -649,26 +547,14 @@ class HOKUYOAIST_EXPORT InsufficientBytesError: public ProtocolError
 
         @param num The number of bytes received.
         @param line_length The length of the line. */
-        InsufficientBytesError(int num, int line_length)
-            : ProtocolError(33, "InsufficientBytesError"),
-            num_(num), line_length_(line_length)
-        {}
-        InsufficientBytesError(InsufficientBytesError const& rhs)
-            : ProtocolError(rhs), num_(rhs.num()),
-            line_length_(rhs.line_length())
-        {}
+        InsufficientBytesError(int num, int line_length);
+        InsufficientBytesError(InsufficientBytesError const& rhs);
 
         virtual int num() const throw()
             { return num_; }
 
         virtual int line_length() const throw()
             { return line_length_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** Number of bytes available. */
@@ -686,26 +572,14 @@ class HOKUYOAIST_EXPORT LineLengthError: public ProtocolError
 
         @param length The number of bytes received.
         @param expected The expected length of the line. */
-        LineLengthError(int length, int expected)
-            : ProtocolError(34, "LineLengthError"),
-            length_(length), expected_(expected)
-        {}
-        LineLengthError(LineLengthError const& rhs)
-            : ProtocolError(rhs), length_(rhs.length()),
-            expected_(rhs.expected())
-        {}
+        LineLengthError(int length, int expected);
+        LineLengthError(LineLengthError const& rhs);
 
         virtual int length() const throw()
             { return length_; }
 
         virtual int expected() const throw()
             { return expected_; }
-
-#if __cplusplus >= 201103L
-        virtual const char* what() const throw();
-#else
-        virtual const char* what() throw();
-#endif
 
     protected:
         /** The received line length. */
@@ -714,7 +588,7 @@ class HOKUYOAIST_EXPORT LineLengthError: public ProtocolError
         int expected_;
 }; // class LineLengthError
 
-}; // namespace hokuyoaist
+} // namespace hokuyoaist
 
 /** @} */
 
