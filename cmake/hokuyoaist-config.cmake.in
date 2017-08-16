@@ -8,8 +8,8 @@
 # HokuyoAIST_VERSION - The version of HokuyoAIST found.
 # HokuyoAIST_VERSION_MAJOR - The major version of HokuyoAIST found.
 # HokuyoAIST_VERSION_MINOR - The minor version of HokuyoAIST found.
-# HokuyoAIST_VERSION_REVISION - The revision version of HokuyoAIST found.
-# HokuyoAIST_VERSION_CANDIDATE - The candidate version of HokuyoAIST found.
+# HokuyoAIST_VERSION_PATCH - The revision version of HokuyoAIST found.
+# HokuyoAIST_VERSION_TWEAK - The candidate version of HokuyoAIST found.
 
 message(STATUS "Found HokuyoAIST-@PROJECT_VERSION@")
 set(HokuyoAIST_FOUND TRUE)
@@ -37,6 +37,5 @@ set(HokuyoAIST_DEFINITIONS ${Flexiport_DEFINITIONS})
 set(HokuyoAIST_VERSION @PROJECT_VERSION@)
 set(HokuyoAIST_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
 set(HokuyoAIST_VERSION_MINOR @PROJECT_VERSION_MINOR@)
-set(HokuyoAIST_VERSION_REVISION @PROJECT_VERSION_REVISION@)
-set(HokuyoAIST_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
-
+set(HokuyoAIST_VERSION_PATCH @PROJECT_VERSION_PATCH@)
+set(HokuyoAIST_VERSION_TWEAK @PROJECT_VERSION_TWEAK@)
