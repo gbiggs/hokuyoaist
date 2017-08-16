@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-project(HokuyoAIST)
+project(HokuyoAIST VERSION 3.0.2)
 string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
 include(${PROJECT_SOURCE_DIR}/cmake/hokuyoaist_utils.cmake)
-set(PROJECT_VERSION 3.0.1 CACHE STRING "HokuyoAIST version")
-DISSECT_VERSION()
 set(PROJECT_DESCRIPTION "Hokuyo range sensor driver.")
 set(PROJECT_VENDOR "Geoffrey Biggs, AIST")
 
