@@ -32,11 +32,7 @@ else(CMAKE_MAJOR_VERSION EQUAL 2 AND CMAKE_MINOR_VERSION GREATER 5)
 		# For 2.4, assume that if boost is found then boost::python is present
 		OPTION (Boost_USE_MULTITHREAD "Use the multithreaded versions of the Boost libraries" ON)
 		MARK_AS_ADVANCED (Boost_USE_MULTITHREAD)
-		if(Boost_USE_MULTITHREAD)
-			SET (BOOST_LIB_SUFFIX "-mt" CACHE STRING "Boost library name suffix")
-		else(Boost_USE_MULTITHREAD)
-			SET (BOOST_LIB_SUFFIX "" CACHE STRING "Boost library name suffix")
-		endif(Boost_USE_MULTITHREAD)
+		SET (BOOST_LIB_SUFFIX "" CACHE STRING "Boost library name suffix")
 		MARK_AS_ADVANCED (BOOST_LIB_SUFFIX)
 
 		SET (boostPythonLib boost_python${BOOST_LIB_SUFFIX})
