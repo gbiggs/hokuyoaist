@@ -303,14 +303,15 @@ std::string ScanData::as_string()
 {
     std::stringstream ss;
 
-    if(ranges_ != 0)
+    if(!ranges_)
     {
-        ss << ranges_length_ << " ranges from model ";
-        ss << model_to_string(model_) << ":\n";
-        for(unsigned int ii(0); ii < ranges_length_; ii++)
-            ss << ranges_[ii] << '\t';
-        ss << '\n';
+        return "No scan data";
     }
+    ss << ranges_length_ << " ranges from model ";
+    ss << model_to_string(model_) << ":\n";
+    for(unsigned int ii(0); ii < ranges_length_; ii++)
+        ss << ranges_[ii] << '\t';
+    ss << '\n';
     if(intensities_ != 0)
     {
         ss << intensities_length_ << " intensities from model ";
