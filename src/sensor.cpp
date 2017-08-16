@@ -241,9 +241,9 @@ unsigned int decode_4_byte_value(char* data)
 void number_to_string(unsigned int num, char* dest, int length)
 {
 #if defined(WIN32)
-    _snprintf(dest, length + 1, "%*d", length, num);
+    _snprintf(dest, length + 1, "%*u", length, num);
 #else
-    snprintf(dest, length + 1, "%*d", length, num);
+    snprintf(dest, length + 1, "%*u", length, num);
 #endif
     // Replace all leading spaces with '0'
     for (int ii = 0; ii < length && dest[ii] == ' '; ii++)
@@ -643,7 +643,7 @@ long long Sensor::calibrate_time(unsigned int skew_sleep_time,
         }
 #if defined(WIN32)
         DWORD sleep_time = skew_sleep_time * 1000;
-		Sleep(sleep_time);
+        Sleep(sleep_time);
 #else
         struct timespec sleep_time = {0, 0};
         sleep_time.tv_sec = skew_sleep_time;
