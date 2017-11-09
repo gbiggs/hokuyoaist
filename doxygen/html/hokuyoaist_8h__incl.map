@@ -1,2 +1,6 @@
-<map id="G" name="G">
+<map id="/home/geoff/src/hokuyoaist/include/hokuyoaist/hokuyoaist.h" name="/home/geoff/src/hokuyoaist/include/hokuyoaist/hokuyoaist.h">
+<area shape="rect" id="node2" href="$hokuyo__errors_8h.html" title="hokuyoaist/hokuyo_errors.h" alt="" coords="5,169,204,196"/>
+<area shape="rect" id="node6" href="$sensor__info_8h.html" title="hokuyoaist/sensor_info.h" alt="" coords="228,169,408,196"/>
+<area shape="rect" id="node8" href="$scan__data_8h.html" title="hokuyoaist/scan_data.h" alt="" coords="358,95,531,121"/>
+<area shape="rect" id="node9" href="$sensor_8h.html" title="hokuyoaist/sensor.h" alt="" coords="534,169,683,196"/>
 </map>

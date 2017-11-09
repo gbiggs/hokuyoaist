@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classhokuyoaist_1_1_protocol_error.html" title="Base protocol error." alt="" coords="13,161,205,189"/>
-<area shape="rect" id="node4" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class." alt="" coords="15,83,204,111"/>
-<area shape="rect" id="node6" href="$classhokuyoaist_1_1_base_error.html" title="General error class." alt="" coords="25,6,193,34"/>
+<map id="hokuyoaist::LineLengthError" name="hokuyoaist::LineLengthError">
+<area shape="rect" id="node2" href="$classhokuyoaist_1_1_protocol_error.html" title="Base protocol error. " alt="" coords="14,229,197,256"/>
+<area shape="rect" id="node3" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class. " alt="" coords="14,155,197,181"/>
+<area shape="rect" id="node4" href="$classhokuyoaist_1_1_base_error.html" title="General error class. " alt="" coords="24,80,187,107"/>
 </map>

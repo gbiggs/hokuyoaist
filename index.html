@@ -1,19 +1,19 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>HokuyoAIST range sensor driver &mdash; HokuyoAIST v3.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>HokuyoAIST range sensor driver &mdash; HokuyoAIST 3.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '3.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -23,23 +23,23 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="HokuyoAIST v3.0.0 documentation" href="#" /> 
+    <link rel="top" title="HokuyoAIST 3.0.0 documentation" href="#" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="#">HokuyoAIST v3.0.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">HokuyoAIST 3.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="hokuyoaist-range-sensor-driver">
 <h1>HokuyoAIST range sensor driver<a class="headerlink" href="#hokuyoaist-range-sensor-driver" title="Permalink to this headline">¶</a></h1>
@@ -61,7 +61,7 @@ URG-04LX-UG01 (Simple-URG).</p>
 library must be installed. If you are using the Windows binary installer,
 Flexiport may be installed with HokuyoAIST. Otherwise, it must be installed
 separately.</p>
-<p>Flexiport is available from <a class="reference external" href="http://www.gibhub.com/gbiggs/flexiport">GitHub</a>.</p>
+<p>Flexiport is available from <a class="reference external" href="http://www.github.com/gbiggs/flexiport">GitHub</a>.</p>
 </div>
 <div class="section" id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
@@ -74,10 +74,10 @@ These can be used as a basis for creating your own software.</p>
 you have write permissions will do), changing to that directory and executing
 CMake with the example&#8217;s source directory as an argument. For example, if you
 have installed HokuyoAIST into /usr/local, you could do the following:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ~
-<span class="nv">$ </span>mkdir hokuyoaist_examples
-<span class="nv">$ </span><span class="nb">cd </span>hokuyoaist_examples
-<span class="nv">$ </span>ccmake /usr/local/share/hokuyoaist-2/examples/
+<div class="highlight-bash"><div class="highlight"><pre>$ <span class="nb">cd</span> ~
+$ mkdir hokuyoaist_examples
+$ <span class="nb">cd</span> hokuyoaist_examples
+$ ccmake /usr/local/share/hokuyoaist-2/examples/
 </pre></div>
 </div>
 </div>
@@ -87,7 +87,7 @@ have installed HokuyoAIST into /usr/local, you could do the following:</p>
 Flexiport object used to communicate with the laser scanner. At a minimum, a
 type will be required. Other options, such as a baud rate, may also be
 specified. For example:</p>
-<div class="highlight-bash"><div class="highlight"><pre>./HokuyoAISTExample_example -o <span class="nb">type</span><span class="o">=</span>serial,device<span class="o">=</span>/dev/ttyACM0,timeout<span class="o">=</span>1 -b 19200
+<div class="highlight-bash"><div class="highlight"><pre>./HokuyoAISTExample_example -o <span class="nv">type</span><span class="o">=</span>serial,device<span class="o">=</span>/dev/ttyACM0,timeout<span class="o">=</span><span class="m">1</span> -b 19200
 </pre></div>
 </div>
 <p>This will start the example, looking for the laser on port /dev/ttyACM0 and
@@ -99,7 +99,7 @@ example.</p>
 Using a log file pair means the hardware (in this case, the laser scanner) does
 not need to be present to execute the example. You can use the log file pairs
 like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre>./HokuyoAISTExample_example -o <span class="nb">type</span><span class="o">=</span>logreader,file<span class="o">=</span>example_urg04lx.log,timeout<span class="o">=</span>1
+<div class="highlight-bash"><div class="highlight"><pre>./HokuyoAISTExample_example -o <span class="nv">type</span><span class="o">=</span>logreader,file<span class="o">=</span>example_urg04lx.log,timeout<span class="o">=</span>1
 </pre></div>
 </div>
 <p>See the Flexiport LogReaderPort object documentation for more options that can
@@ -142,18 +142,25 @@ Industrial Science and Technology. Approval number H22PRO-1195. This
 software is licensed under the Lesser General Public License. See
 COPYING.LESSER.</p>
 </div>
+<div class="section" id="changelist">
+<h1>Changelist<a class="headerlink" href="#changelist" title="Permalink to this headline">¶</a></h1>
+<p>4.0</p>
+<ul class="simple">
+<li>Removed support for serial connections (note: not serial-over-USB, which is
+what all current non-ethernet Hokuyo sensors use).</li>
+<li>Removed SCIP 1.0 support.</li>
+</ul>
+</div>
 
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">HokuyoAIST range sensor driver</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">HokuyoAIST range sensor driver</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#building">Building</a></li>
@@ -163,17 +170,20 @@ COPYING.LESSER.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#changelist">Changelist</a></li>
 </ul>
 
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -187,18 +197,18 @@ COPYING.LESSER.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="#">HokuyoAIST v3.0.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">HokuyoAIST 3.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011, Geoffrey Biggs.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

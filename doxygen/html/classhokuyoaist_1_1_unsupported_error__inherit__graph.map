@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class." alt="" coords="20,83,209,111"/>
-<area shape="rect" id="node4" href="$classhokuyoaist_1_1_base_error.html" title="General error class." alt="" coords="31,6,199,34"/>
+<map id="hokuyoaist::UnsupportedError" name="hokuyoaist::UnsupportedError">
+<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class. " alt="" coords="21,155,203,181"/>
+<area shape="rect" id="node3" href="$classhokuyoaist_1_1_base_error.html" title="General error class. " alt="" coords="31,80,193,107"/>
 </map>

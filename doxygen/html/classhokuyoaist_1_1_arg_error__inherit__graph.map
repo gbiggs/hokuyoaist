@@ -1,7 +1,7 @@
-<map id="G" name="G">
-<area shape="rect" id="node7" href="$classhokuyoaist_1_1_end_step_error.html" title="Bad end step error class." alt="" coords="5,238,195,266"/>
-<area shape="rect" id="node9" href="$classhokuyoaist_1_1_motor_speed_error.html" title="Invalid motor speed error class." alt="" coords="219,238,435,266"/>
-<area shape="rect" id="node11" href="$classhokuyoaist_1_1_start_step_error.html" title="Bad start step error class." alt="" coords="459,238,656,266"/>
-<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class." alt="" coords="232,83,421,111"/>
-<area shape="rect" id="node4" href="$classhokuyoaist_1_1_base_error.html" title="General error class." alt="" coords="243,6,411,34"/>
+<map id="hokuyoaist::ArgError" name="hokuyoaist::ArgError">
+<area shape="rect" id="node5" href="$classhokuyoaist_1_1_end_step_error.html" title="Bad end step error class. " alt="" coords="5,304,189,331"/>
+<area shape="rect" id="node6" href="$classhokuyoaist_1_1_motor_speed_error.html" title="Invalid motor speed error class. " alt="" coords="213,304,421,331"/>
+<area shape="rect" id="node7" href="$classhokuyoaist_1_1_start_step_error.html" title="Bad start step error class. " alt="" coords="445,304,637,331"/>
+<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class. " alt="" coords="226,155,409,181"/>
+<area shape="rect" id="node3" href="$classhokuyoaist_1_1_base_error.html" title="General error class. " alt="" coords="236,80,399,107"/>
 </map>

@@ -1,16 +1,16 @@
-<map id="G" name="G">
-<area shape="rect" id="node7" href="$classhokuyoaist_1_1_checksum_error.html" title="Bad checksum error." alt="" coords="735,5,937,33"/>
-<area shape="rect" id="node9" href="$classhokuyoaist_1_1_command_echo_error.html" title="Command echo error." alt="" coords="717,55,955,83"/>
-<area shape="rect" id="node11" href="$classhokuyoaist_1_1_data_count_error.html" title="Incorrect number of data sets read error." alt="" coords="732,106,940,134"/>
-<area shape="rect" id="node13" href="$classhokuyoaist_1_1_insufficient_bytes_error.html" title="Insufficient bytes to calculate checksum error." alt="" coords="715,157,957,185"/>
-<area shape="rect" id="node15" href="$classhokuyoaist_1_1_line_length_error.html" title="Incorrect line length error." alt="" coords="732,207,940,235"/>
-<area shape="rect" id="node17" href="$classhokuyoaist_1_1_misplaced_line_feed_error.html" title="Misplaced line feed error." alt="" coords="707,258,965,286"/>
-<area shape="rect" id="node19" href="$classhokuyoaist_1_1_missing_firm_spec_error.html" title="Missing firmware specification error." alt="" coords="715,309,957,337"/>
-<area shape="rect" id="node21" href="$classhokuyoaist_1_1_param_echo_error.html" title="Parameter echo error." alt="" coords="731,359,941,387"/>
-<area shape="rect" id="node23" href="$classhokuyoaist_1_1_parse_error.html" title="Parse error." alt="" coords="749,410,923,438"/>
-<area shape="rect" id="node25" href="$classhokuyoaist_1_1_response_error.html" title="Bad response error &#45; may be sent in response to any command." alt="" coords="736,461,936,489"/>
-<area shape="rect" id="node27" href="$classhokuyoaist_1_1_scip1_response_error.html" title="Bad response error (SCIP1 version)" alt="" coords="719,511,953,539"/>
-<area shape="rect" id="node29" href="$classhokuyoaist_1_1_unknown_line_error.html" title="UnknownLine error." alt="" coords="724,562,948,590"/>
-<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class." alt="" coords="225,283,415,311"/>
-<area shape="rect" id="node4" href="$classhokuyoaist_1_1_base_error.html" title="General error class." alt="" coords="7,283,175,311"/>
+<map id="hokuyoaist::ProtocolError" name="hokuyoaist::ProtocolError">
+<area shape="rect" id="node5" href="$classhokuyoaist_1_1_checksum_error.html" title="Bad checksum error. " alt="" coords="853,5,1050,32"/>
+<area shape="rect" id="node6" href="$classhokuyoaist_1_1_command_echo_error.html" title="Command echo error. " alt="" coords="837,56,1065,83"/>
+<area shape="rect" id="node7" href="$classhokuyoaist_1_1_data_count_error.html" title="Incorrect number of data sets read error. " alt="" coords="852,107,1051,133"/>
+<area shape="rect" id="node8" href="$classhokuyoaist_1_1_insufficient_bytes_error.html" title="Insufficient bytes to calculate checksum error. " alt="" coords="868,158,1035,199"/>
+<area shape="rect" id="node9" href="$classhokuyoaist_1_1_line_length_error.html" title="Incorrect line length error. " alt="" coords="851,224,1051,251"/>
+<area shape="rect" id="node10" href="$classhokuyoaist_1_1_misplaced_line_feed_error.html" title="Misplaced line feed error. " alt="" coords="857,275,1045,317"/>
+<area shape="rect" id="node11" href="$classhokuyoaist_1_1_missing_firm_spec_error.html" title="Missing firmware specification error. " alt="" coords="849,341,1054,382"/>
+<area shape="rect" id="node12" href="$classhokuyoaist_1_1_param_echo_error.html" title="Parameter echo error. " alt="" coords="850,407,1053,433"/>
+<area shape="rect" id="node13" href="$classhokuyoaist_1_1_parse_error.html" title="Parse error. " alt="" coords="869,457,1034,484"/>
+<area shape="rect" id="node14" href="$classhokuyoaist_1_1_response_error.html" title="Bad response error &#45; may be sent in response to any command. " alt="" coords="856,508,1047,535"/>
+<area shape="rect" id="node15" href="$classhokuyoaist_1_1_scip1_response_error.html" title="Bad response error (SCIP1 version) " alt="" coords="854,559,1049,601"/>
+<area shape="rect" id="node16" href="$classhokuyoaist_1_1_unknown_line_error.html" title="UnknownLine error. " alt="" coords="844,625,1059,652"/>
+<area shape="rect" id="node2" href="$classhokuyoaist_1_1_runtime_error.html" title="Runtime error class. " alt="" coords="376,316,559,343"/>
+<area shape="rect" id="node3" href="$classhokuyoaist_1_1_base_error.html" title="General error class. " alt="" coords="165,316,328,343"/>
 </map>

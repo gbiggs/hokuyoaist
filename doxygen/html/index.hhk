@@ -76,6 +76,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#abeefa8463dd14d9d49abc168c91b1b3d"><param name="Name" value="hokuyoaist::Scip1ResponseError"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scan_data.html#a1bb20be086acb27491ea3ea75cf56c8d"><param name="Name" value="error_code_to_string"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a162a1d7437b56255e2bcaca2845a1258"><param name="Name" value="error_str_"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a7fd068d3dca18361a88e3f58f259e3d5"><param name="Name" value="error_type"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a2704f4b50bc24c8fd917b9d13772560c"><param name="Name" value="error_type_"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#a30e4ed3364784f75c47ca060abe1f5a0"><param name="Name" value="expected"></OBJECT>
@@ -124,10 +125,10 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a0202259862d5dc5a3e37b3ba0224797a"><param name="Name" value="BaseError"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#aa4dedb2a05746635aa70e16e0c1d3fdb"><param name="Name" value="desc_code"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#acea3a2f4425c1b3e110e50b757d17ed0"><param name="Name" value="desc_code_"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a162a1d7437b56255e2bcaca2845a1258"><param name="Name" value="error_str_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a7fd068d3dca18361a88e3f58f259e3d5"><param name="Name" value="error_type"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a2704f4b50bc24c8fd917b9d13772560c"><param name="Name" value="error_type_"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#afcfdb3c775f313111703991b4ae5fcc6"><param name="Name" value="ss"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a09c0fc74be4e57299ccc44803bb76128"><param name="Name" value="what"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a8a2fd5543842ba7bc51a25ca92a6fcc4"><param name="Name" value="what"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a10df9cc4f86b15cc8225d804bef72792"><param name="Name" value="~BaseError"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html"><param name="Name" value="hokuyoaist::BaudrateError"></OBJECT>
@@ -135,7 +136,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html#abf565816af2a62949bd53528f00c3a9c"><param name="Name" value="baud"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html#a51d6ab5ddee202a6e26c04adb470b4ac"><param name="Name" value="baud_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html#a44e081a54487fe10df03ad65840d3ae0"><param name="Name" value="BaudrateError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html#a6a985ae5c42e0761749e226cf3286740"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html"><param name="Name" value="hokuyoaist::ChecksumError"></OBJECT>
   <UL>
@@ -144,7 +144,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#a970195866117414c9aceeef5fd3c3fe9"><param name="Name" value="ChecksumError"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#a30e4ed3364784f75c47ca060abe1f5a0"><param name="Name" value="expected"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#aa5b87cb71a94c86e0e4d12a214eac50b"><param name="Name" value="expected_"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#ae6eaa63dd5e1dba4e34ed493bd5ac66e"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_close_error.html"><param name="Name" value="hokuyoaist::CloseError"></OBJECT>
   <UL>
@@ -157,7 +156,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html#a57057edff09347c8639b76a72f50de8a"><param name="Name" value="cmd_echo"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html#a81b1526e390cfb86b88afe9c6a75a594"><param name="Name" value="CommandEchoError"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html#aa02c9876de65aef972f919ad3d4c8c9f"><param name="Name" value="echo_"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html#a9a27eb03f395cb3a5d25bc1430eb20ad"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_data_count_error.html"><param name="Name" value="hokuyoaist::DataCountError"></OBJECT>
   <UL>
@@ -182,7 +180,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#a646a628b73d04f032f4d4eeceb3375f1"><param name="Name" value="line_length_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#a6a9c7353fe053503b8a37da9bd62f9b8"><param name="Name" value="num"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#adc66ce44eaa37ec3508ba3bbbbbfd6ef"><param name="Name" value="num_"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#aaf62d20d0f05ba1138acf55d113c26ec"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="structhokuyoaist_1_1_i_p_addr.html"><param name="Name" value="hokuyoaist::IPAddr"></OBJECT>
   <UL>
@@ -198,7 +195,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html#aa4bb193a66bad1943e77c6417f14e935"><param name="Name" value="length"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html#aaacdcd19d2d7ad18a5a15c4ae345ddfd"><param name="Name" value="length_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html#ad8dc7a50864b0add49a79ba34acaa0da"><param name="Name" value="LineLengthError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html#ad226c31f3e263c5169d87039b50c13b2"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_logic_error.html"><param name="Name" value="hokuyoaist::LogicError"></OBJECT>
   <UL>
@@ -234,7 +230,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html#a8fefc7ecbda72e491c22854538fed504"><param name="Name" value="cmd_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html#a19519bbf0c187ea01148f189a987f4f7"><param name="Name" value="cmd_code"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html#a81e063d9d25c8639478f15a7deacf2be"><param name="Name" value="ParamEchoError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html#a48d645190cbf1175fdf4d71ba74c0898"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html"><param name="Name" value="hokuyoaist::ParseError"></OBJECT>
   <UL>
@@ -243,7 +238,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html#afd72574f1aaf75f8fd65434d9f997476"><param name="Name" value="ParseError"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html#a98bca857dba28c45d3759854c7d4f5e5"><param name="Name" value="type"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html#ad640e7da4802cc9e93c2724dfcc5573f"><param name="Name" value="type_"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html#a8c247fa0c692e3f8a5f884782b3c1772"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_protocol_error.html"><param name="Name" value="hokuyoaist::ProtocolError"></OBJECT>
   <UL>
@@ -261,7 +255,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_response_error.html#a767fe33e4ee62ec0836955a1813dbd9b"><param name="Name" value="error_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_response_error.html#aec2098203106c0e804a8386e1ba7db9a"><param name="Name" value="error_code"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_response_error.html#a84458aa705ad6ff98ddacff251e07515"><param name="Name" value="ResponseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_response_error.html#a3856d2023e5ca88b371f82addaeafd14"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_runtime_error.html"><param name="Name" value="hokuyoaist::RuntimeError"></OBJECT>
   <UL>
@@ -307,7 +300,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#a20be5b38558945a53b9d3485d1d3a5ae"><param name="Name" value="error_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#abeefa8463dd14d9d49abc168c91b1b3d"><param name="Name" value="error_code"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#a5b6baa85844070a2aacab8159df6c260"><param name="Name" value="Scip1ResponseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#a03d473ec6c4b4544b2c390f213dddb44"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip_version_error.html"><param name="Name" value="hokuyoaist::ScipVersionError"></OBJECT>
   <UL>
@@ -333,12 +325,10 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#abb66949107fa51ad9dee87103f774ddf"><param name="Name" value="ignore_unknowns"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#ab6c954a6c76ea01cb1361324ec180397"><param name="Name" value="is_open"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a072680f6b06f223090b60d0f6333ecaf"><param name="Name" value="open"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#ad2fa017875ca575d569610386843a313"><param name="Name" value="open_with_probing"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a3cae252f7a5275f32647c047ea47d451"><param name="Name" value="reset"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a536f0190079756fb6eaf9af4f73c160d"><param name="Name" value="scip_version"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#ac9a87aa1278317cf4dc799b4387dc067"><param name="Name" value="semi_reset"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a9218522a99aaca7d477f6e48d7791580"><param name="Name" value="Sensor"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#aaf5083861bbc22436285eb37e4f7d53b"><param name="Name" value="set_baud"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a8818ae56c855f758c02872766e6d0c06"><param name="Name" value="set_drift_rate"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a0a2ba134554a0263f202fe6712212c60"><param name="Name" value="set_high_sensitivity"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a30aeda703d3a9d2c36830c5cc6fdda19"><param name="Name" value="set_ip"></OBJECT>
@@ -401,7 +391,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html#afcf0bcafd3ac9f5aadce6fb94a66b0a5"><param name="Name" value="line"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html#af05c3b0dda95091b2a2b1f2c401bfe66"><param name="Name" value="line_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html#a48c10a40f29243638ff1505abd5d3a7d"><param name="Name" value="UnknownLineError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html#a508d6b3d459d110f5b04b69d1602cfb1"><param name="Name" value="what"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_scip_version_error.html"><param name="Name" value="hokuyoaist::UnknownScipVersionError"></OBJECT>
   <UL>
@@ -428,7 +417,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a05460d89cd04a1d009915c5b1720c5beaba2a47a643e26efebd3f0b3c2c3976c0"><param name="Name" value="ME_MIDDLE"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a05460d89cd04a1d009915c5b1720c5beabec94776e316a9bae3e1973728b95472"><param name="Name" value="ME_OFF"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a05460d89cd04a1d009915c5b1720c5bea88c227e8fd93dc97c93df0c4341668cf"><param name="Name" value="ME_REAR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#af6a2a97bae8087395c87df389473be41"><param name="Name" value="median"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#ac268b709e32c7f63d322c7019c366731"><param name="Name" value="median"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#aa435d1009cfd867b4b4591845dea1538"><param name="Name" value="model_to_string"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a5d5f4f9c6b7085bc4364539fc4314169a61ebc25378f72bae1364d44af2457c50"><param name="Name" value="MODEL_UBG04LXF01"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a5d5f4f9c6b7085bc4364539fc4314169a640a0331d285b1958d4e52e084a13371"><param name="Name" value="MODEL_UHG08LX"></OBJECT>
@@ -496,10 +485,10 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a05460d89cd04a1d009915c5b1720c5beabec94776e316a9bae3e1973728b95472"><param name="Name" value="ME_OFF"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#a05460d89cd04a1d009915c5b1720c5bea88c227e8fd93dc97c93df0c4341668cf"><param name="Name" value="ME_REAR"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#a47a3399236a6a08d0d50ba4df0800797"><param name="Name" value="measure_state"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#af6a2a97bae8087395c87df389473be41"><param name="Name" value="median"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#ac268b709e32c7f63d322c7019c366731"><param name="Name" value="median"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#af6a2a97bae8087395c87df389473be41"><param name="Name" value="hokuyoaist"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#af6a2a97bae8087395c87df389473be41"><param name="Name" value="utils.h"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#ac268b709e32c7f63d322c7019c366731"><param name="Name" value="hokuyoaist"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespacehokuyoaist.html#ac268b709e32c7f63d322c7019c366731"><param name="Name" value="utils.h"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#a1828373685632c777e495a44cdd7c50e"><param name="Name" value="min_angle"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#aa814c8a161b333f7f6c06a75ee2091b0"><param name="Name" value="min_range"></OBJECT>
@@ -534,7 +523,6 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#a6a9c7353fe053503b8a37da9bd62f9b8"><param name="Name" value="num"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#adc66ce44eaa37ec3508ba3bbbbbfd6ef"><param name="Name" value="num_"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a072680f6b06f223090b60d0f6333ecaf"><param name="Name" value="open"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#ad2fa017875ca575d569610386843a313"><param name="Name" value="open_with_probing"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scan_data.html#a0aa02686b7dc1948bdafb496e5b52f93"><param name="Name" value="operator="></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scan_data.html#a0aa02686b7dc1948bdafb496e5b52f93"><param name="Name" value="hokuyoaist::ScanData"></OBJECT>
@@ -602,7 +590,6 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#ac4d0994c3f1b10af09a2bc3640365259"><param name="Name" value="SensorInfo"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#a2a1d99943db16b8da754ce1e10732f4e"><param name="Name" value="serial"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#aaf5083861bbc22436285eb37e4f7d53b"><param name="Name" value="set_baud"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a8818ae56c855f758c02872766e6d0c06"><param name="Name" value="set_drift_rate"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a0a2ba134554a0263f202fe6712212c60"><param name="Name" value="set_high_sensitivity"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#a30aeda703d3a9d2c36830c5cc6fdda19"><param name="Name" value="set_ip"></OBJECT>
@@ -616,7 +603,6 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#af812ebe4b1e79f050cdf3d8cc5f0ad71"><param name="Name" value="skew_alpha"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#a21d9fbc70d5314aa8ab1011c1326857a"><param name="Name" value="speed"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#a1716d5adb7c244db993a8133f78a4fae"><param name="Name" value="speed_level"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#afcfdb3c775f313111703991b4ae5fcc6"><param name="Name" value="ss"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#af031ac2805fa5b5452db7c35b4d917c8"><param name="Name" value="standard_speed"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_start_step_error.html#a431a5caa4ba5de1ea95bd13038fd9815"><param name="Name" value="StartStepError"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor.html#aea161156cd1a22fd4cb714fa857dac2e"><param name="Name" value="step_to_angle"></OBJECT>
@@ -642,24 +628,11 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#a949a1c2481e286ab9459318642d5be12"><param name="Name" value="DTOR"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#a48cc3952b3d24201d495f5f3b3c066d4"><param name="Name" value="HOKUYOAIST_EXPORT"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#a9bc199f2104c94c5875d0bc654f52545"><param name="Name" value="M_PI"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#af6a2a97bae8087395c87df389473be41"><param name="Name" value="median"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#ac268b709e32c7f63d322c7019c366731"><param name="Name" value="median"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="utils_8h.html#ade15d792792ece350a422f3e1432ad1f"><param name="Name" value="RTOD"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_sensor_info.html#ab3e0db7a287720646e33c7d90bae1efd"><param name="Name" value="vendor"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a09c0fc74be4e57299ccc44803bb76128"><param name="Name" value="what"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a09c0fc74be4e57299ccc44803bb76128"><param name="Name" value="hokuyoaist::BaseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_baudrate_error.html#a6a985ae5c42e0761749e226cf3286740"><param name="Name" value="hokuyoaist::BaudrateError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_checksum_error.html#ae6eaa63dd5e1dba4e34ed493bd5ac66e"><param name="Name" value="hokuyoaist::ChecksumError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_command_echo_error.html#a9a27eb03f395cb3a5d25bc1430eb20ad"><param name="Name" value="hokuyoaist::CommandEchoError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_insufficient_bytes_error.html#aaf62d20d0f05ba1138acf55d113c26ec"><param name="Name" value="hokuyoaist::InsufficientBytesError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_line_length_error.html#ad226c31f3e263c5169d87039b50c13b2"><param name="Name" value="hokuyoaist::LineLengthError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_param_echo_error.html#a48d645190cbf1175fdf4d71ba74c0898"><param name="Name" value="hokuyoaist::ParamEchoError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_parse_error.html#a8c247fa0c692e3f8a5f884782b3c1772"><param name="Name" value="hokuyoaist::ParseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_response_error.html#a3856d2023e5ca88b371f82addaeafd14"><param name="Name" value="hokuyoaist::ResponseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scip1_response_error.html#a03d473ec6c4b4544b2c390f213dddb44"><param name="Name" value="hokuyoaist::Scip1ResponseError"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_unknown_line_error.html#a508d6b3d459d110f5b04b69d1602cfb1"><param name="Name" value="hokuyoaist::UnknownLineError"></OBJECT>
-  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_base_error.html#a8a2fd5543842ba7bc51a25ca92a6fcc4"><param name="Name" value="what"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scan_data.html#a38897e2b4d8988d19804e31fdf72aa96"><param name="Name" value="write_intensity"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_scan_data.html#a490e9213b2fb98053f5a3854aae4957b"><param name="Name" value="write_range"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classhokuyoaist_1_1_write_error.html#af127b3c821d97ddc2409388ff8f81b61"><param name="Name" value="WriteError"></OBJECT>
